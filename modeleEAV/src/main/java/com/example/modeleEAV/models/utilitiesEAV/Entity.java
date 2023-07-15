@@ -38,15 +38,9 @@ public abstract class Entity {
         this.description = description;
     }
 
-    public Entity( String slug, String title, String description, String createdAt, UUID createdBy, String updatedAt, UUID updatedBy, String deletedAt, UUID deletedBy) {
+    public Entity( String slug, String title, String description) {
         this.slug = slug;
         this.title = title;
         this.description = description;
-        this.createdAt = createdAt;
-        this.createdBy = createdBy;
-        this.updatedAt = updatedAt;
-        this.updatedBy = updatedBy;
-        this.deletedAt = deletedAt;
-        this.deletedBy = deletedBy;
     }
 }

@@ -49,19 +49,13 @@ public class AttributSetController {
         return attributeSetService.getAttributeSet();
     }
 
-    @GetMapping(path = "{title}")
-    public AttributeSet FindAttributSetByTitle(@PathVariable("title") String title){
-        return attributeSetService.findAttributeSetbyTitle(title);
-    }
+
 
     @GetMapping(path = "{attributSetId}")
     public AttributeSet FindAttributSetById(@PathVariable("attributSetId") Long attributSetId){
         return attributeSetService.findAttributeSetbyId(attributSetId);
     }
 
-    @GetMapping("{attributesId}/attributes")
-    public Optional<AttributeSet> findAttributeSetbyAttributId(@PathVariable Long attributSetId) {
-        return attributeSetService.findAttributeSetbyAttributId(attributSetId);
-    }
+  
 
 }

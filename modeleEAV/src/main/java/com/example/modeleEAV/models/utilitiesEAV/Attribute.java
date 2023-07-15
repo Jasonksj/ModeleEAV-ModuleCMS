@@ -22,13 +22,22 @@ public class Attribute extends Entity {
     private boolean shared;
     private boolean measurable;
     private boolean isEntityDedicated;
-    @ManyToOne
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "attributeSet_id",
+            referencedColumnName = "id"
+    )
     private AttributeSet attributeSet;
     @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            cascade = CascadeType.ALL
     )
-    private List<AttributeValue> predefinedValues = new ArrayList<>();
+    @JoinColumn(
+            name = "attribute_id",
+            referencedColumnName = "id"
+    )
+    private List<AttributeValue> predefinedValues;
 
     public Attribute() {
         super(new String(), new String());
@@ -36,7 +45,6 @@ public class Attribute extends Entity {
 
     public Attribute(String title, String description) {
         super(title, description);
-        this.predefinedValues = new ArrayList<>();
     }
 
     public Attribute(String title, String description, AttributeType type, boolean requiredValue, boolean multipleValues, boolean freezeValues, boolean overriden, boolean shareable, boolean shared, boolean measurable, boolean isEntityDedicated) {
@@ -50,10 +58,11 @@ public class Attribute extends Entity {
         this.shared = shared;
         this.measurable = measurable;
         this.isEntityDedicated = isEntityDedicated;
+        this.predefinedValues = new ArrayList<>();
     }
 
-    public Attribute(String slug, String title, String description, String createdAt, UUID createdBy, String updatedAt, UUID updatedBy, String deletedAt, UUID deletedBy, AttributeType type, boolean requiredValue, boolean multipleValues, boolean freezeValues, boolean overriden, boolean shareable, boolean shared, boolean measurable, boolean isEntityDedicated, AttributeSet attributeSet) {
-        super(slug, title, description, createdAt, createdBy, updatedAt, updatedBy, deletedAt, deletedBy);
+    public Attribute(String slug, String title, String description, AttributeType type, boolean requiredValue, boolean multipleValues, boolean freezeValues, boolean overriden, boolean shareable, boolean shared, boolean measurable, boolean isEntityDedicated, AttributeSet attributeSet) {
+        super(slug, title, description);
         this.type = type;
         this.requiredValue = requiredValue;
         this.multipleValues = multipleValues;
@@ -66,7 +75,7 @@ public class Attribute extends Entity {
         this.attributeSet = attributeSet;
     }
 
-    private void addValuesInAttribute(AttributeValue value){
+    public void addValuesInAttribute(AttributeValue value){
         this.predefinedValues.add(value);
     }
 }

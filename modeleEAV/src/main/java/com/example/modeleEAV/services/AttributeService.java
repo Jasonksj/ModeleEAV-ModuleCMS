@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Data
 @Service
@@ -22,6 +23,12 @@ public class AttributeService {
 
     public List<Attribute> getAttributes(){
         return attributeRepository.findAll();
+    }
+
+    public List<Attribute> SearchAttributes(String str) {
+        return attributeRepository.findAll().stream().filter(S->{
+            return S.getTitle().contains(str) || S.getDescription().contains(str);
+        }).collect(Collectors.toList());
     }
 
     public void addAttribute(Attribute attribute){
@@ -112,6 +119,11 @@ public class AttributeService {
                         "No attributSet"
                 ));
 
+        return attributes;
+    }
+
+    public List<Attribute> findAttributByTitle() {
+        List<Attribute> attributes = attributeRepository.findAttributeByTitle();
         return attributes;
     }
 }

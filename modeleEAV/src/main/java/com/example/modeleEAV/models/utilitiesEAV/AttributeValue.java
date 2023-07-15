@@ -2,6 +2,8 @@ package com.example.modeleEAV.models.utilitiesEAV;
 
 import lombok.*;
 
+import javax.persistence.CascadeType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
@@ -17,7 +19,13 @@ public class AttributeValue extends Entity {
     private String suffix;
     private String symbol;
 
-    @ManyToOne
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "attribute_id",
+            referencedColumnName = "id"
+    )
     private Attribute attribute;
 
 
@@ -38,7 +46,11 @@ public class AttributeValue extends Entity {
         this.value = value;
     }
 
-    public AttributeValue() {
+    public AttributeValue(String value, boolean validated, String suffix, String symbol) {
         super(new String(), new String());
+        this.value = value;
+        this.validated = validated;
+        this.suffix = suffix;
+        this.symbol = symbol;
     }
 }

@@ -24,6 +24,15 @@ public class AttributeController {
         return attributeService.getAttributes();
     }
 
+    @GetMapping("/attributeTitle")
+    public List<Attribute> findAttributByTitle(){
+        return attributeService.findAttributByTitle();
+    }
+
+    @GetMapping(path = "/search/{Str}")
+    public List<Attribute> SearchAttributes(@PathVariable String Str){
+        return attributeService.SearchAttributes(Str);
+    }
     @PostMapping
     public List<Attribute> registerNewAttribute(@RequestBody Attribute attribute){
         attributeService.addAttribute(attribute);
