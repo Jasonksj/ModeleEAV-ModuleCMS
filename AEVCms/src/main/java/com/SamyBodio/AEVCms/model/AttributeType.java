@@ -1,15 +1,15 @@
 package com.SamyBodio.AEVCms.model;
 
 public enum AttributeType {
-    String,
-    TString,
-    Object,
-    Number,
-    Int,
-    Float,
-    Boolean,
-    Currency,
-    DateTime,
-    Date,
-    Hour
+    STRING,
+    TSTRING,
+    OBJECT,
+    NUMBER,
+    INT,
+    FLOAT,
+    BOOLEAN,
+    CURRENCY,
+    DATETIME,
+    DATE,
+    HOUR
 }

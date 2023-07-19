@@ -24,10 +24,6 @@ public class User {
     private String Name;
     @Column(length = 10)
     private String passWord;
-    @OneToMany(
-            cascade = CascadeType.ALL
-    )
-    List<Attribute> attributeList = new ArrayList<>();
 
     public User(String name, String passWord) {
         Name = name;

@@ -1,11 +1,14 @@
 package com.SamyBodio.AEVCms.model;
 
+import com.SamyBodio.AEVCms.model.entity.*;
+import com.SamyBodio.AEVCms.model.entity.Str.TString2;
 import com.SamyBodio.AEVCms.model.entity.User;
+import jakarta.annotation.Nullable;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.Table;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,32 +18,28 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
+@Table(
+        name = "AttributeSet"
+)
 public class AttributeSet extends SuperEntity {
-    private String titleFr;
-    private String titleEn;
-    private String descriptionFr;
-    private String descriptionEn;
+
     private Boolean shareable;
 
-    @OneToMany
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            mappedBy = "attributeSet"
+    )
     private List<Attribute> attributes = new ArrayList<>();
 
     public AttributeSet(String slug,
-                       String title,
-                       String description,
-                       User createBy,
-                       User updateBy,
-                       User deleteBy,
-                       String titleFr,
-                       String titleEn,
-                       String descriptionFr,
-                       String descriptionEn,
+                       @Nullable User createBy,
+                       @Nullable User updateBy,
+                       @Nullable User deleteBy,
+                       TString title,
+                       TString2 description,
                        Boolean shareable) {
         super(slug,title,description,createBy,updateBy,deleteBy);
-        this.titleFr = titleFr;
-        this.titleEn = titleEn;
-        this.descriptionFr = descriptionFr;
-        this.descriptionEn = descriptionEn;
         this.shareable = shareable;
     }
 }
