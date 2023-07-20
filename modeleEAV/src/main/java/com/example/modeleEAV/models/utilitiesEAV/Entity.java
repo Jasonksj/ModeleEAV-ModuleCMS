@@ -1,9 +1,8 @@
 package com.example.modeleEAV.models.utilitiesEAV;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
@@ -12,26 +11,24 @@ import java.util.UUID;
 @MappedSuperclass
 public abstract class Entity {
     @Id
-    @SequenceGenerator(
-            name = "entity_sequence",
-            sequenceName = "entity_sequence",
-            allocationSize = 1
-    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
+            strategy = GenerationType.UUID,
             generator = "entity_sequence"
     )
-    protected Long id;
-    //protected UUID id = UUID.randomUUID();
+    protected UUID id;
     protected String slug;
     protected String title;
     protected String description;
-    protected String createdAt = new Date().toString();
-    protected UUID createdBy;
-    protected String updatedAt = new Date().toString();
-    protected UUID updatedBy;
-    protected String deletedAt = new Date().toString();
-    protected UUID deletedBy;
+    @Temporal(TemporalType.DATE)
+    @Column(updatable = false)
+    protected Date createdAt = new Date();
+    protected UUID createdBy = UUID.randomUUID();
+    @Temporal(TemporalType.DATE)
+    protected Date updatedAt = new Date();
+    protected UUID updatedBy = UUID.randomUUID();
+    @Temporal(TemporalType.DATE)
+    protected Date deletedAt = new Date();
+    protected UUID deletedBy = UUID.randomUUID();
 
     public Entity(String title, String description) {
         this.title = title;

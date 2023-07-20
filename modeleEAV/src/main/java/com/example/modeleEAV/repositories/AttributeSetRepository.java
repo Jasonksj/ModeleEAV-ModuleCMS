@@ -11,10 +11,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface AttributeSetRepository extends JpaRepository<AttributeSet, Long> {
+public interface AttributeSetRepository extends JpaRepository<AttributeSet, UUID> {
     @Query("SELECT s FROM AttributeSet s WHERE s.title = ?1")
     Optional<AttributeSet> findAttributeSetByTitle(String title);
 
     @Query("SELECT s FROM Attribute s WHERE s.id = ?1")
-    Optional<AttributeSet> findAttributeByAttributSetId(Long id);
+    Optional<AttributeSet> findAttributeByAttributSetId(UUID id);
 }

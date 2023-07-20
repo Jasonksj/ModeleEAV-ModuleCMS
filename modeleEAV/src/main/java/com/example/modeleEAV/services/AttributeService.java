@@ -1,5 +1,6 @@
 package com.example.modeleEAV.services;
 
+import com.example.modeleEAV.models.DTO.AttributDTO;
 import com.example.modeleEAV.models.utilitiesEAV.Attribute;
 import com.example.modeleEAV.models.utilitiesEAV.AttributeType;
 import com.example.modeleEAV.repositories.AttributeRepository;
@@ -10,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Data
@@ -35,7 +38,7 @@ public class AttributeService {
         attributeRepository.save(attribute);
     }
 
-    public void deleteAttribute(Long attributeId) {
+    public void deleteAttribute(UUID attributeId) {
         boolean exists = attributeRepository.existsById(attributeId);
         if(!exists){
             throw new IllegalStateException(
@@ -47,51 +50,45 @@ public class AttributeService {
     }
 
     @Transactional
-    public void updateAttribut(Long attributId, String title, String description,
-                              AttributeType type, boolean requiredValue,
-                              boolean multipleValues, boolean freezeValues,
-                              boolean overriden, boolean shareable,
-                              boolean shared, boolean measurable,
-                              boolean isEntityDedicated) {
+    public void updateAttribut(UUID attributId, AttributDTO attributDTO) {
 
-        Attribute attribute = attributeRepository.findById(attributId)
+        Attribute optionalAttribute = attributeRepository.findById(attributId)
                 .orElseThrow(() -> new IllegalStateException(
                         "Attribute with id " + attributId + " does not exists"
                 ));
 
-        if(title != null && title.length() > 0 && !Objects.equals(attribute.getTitle(), title)){
-            attribute.setTitle(title);
+        if(optionalAttribute.getTitle() != null && optionalAttribute.getTitle().length() > 0){
+            optionalAttribute.setTitle(attributDTO.getTitle());
         }
 
-        if(description != null && description.length() > 0 && !Objects.equals(attribute.getDescription(), description)){
-            attribute.setDescription(description);
+        if(optionalAttribute.getDescription() != null && optionalAttribute.getDescription().length() > 0){
+            optionalAttribute.setDescription(attributDTO.getDescription());
         }
 
-        if(type != null && !Objects.equals(attribute.getType(), type)){
-            attribute.setType(type);
+        if(optionalAttribute.getType() != null){
+            optionalAttribute.setType(attributDTO.getType());
         }
-        if(!attribute.isMultipleValues()){
-            attribute.setMultipleValues(multipleValues);
+        if(!optionalAttribute.isMultipleValues()){
+            optionalAttribute.setMultipleValues(attributDTO.isMultipleValues());
         }
-        if(!attribute.isFreezeValues()){
-            attribute.setFreezeValues(freezeValues);
+        if(!optionalAttribute.isFreezeValues()){
+            optionalAttribute.setFreezeValues(attributDTO.isFreezeValues());
         }
-        if(!attribute.isOverriden()){
-            attribute.setOverriden(overriden);
+        if(!optionalAttribute.isOverriden()){
+            optionalAttribute.setOverriden(attributDTO.isOverriden());
         }
-        if(!attribute.isShareable()){
-            attribute.setShareable(shareable);
+        if(!optionalAttribute.isShareable()){
+            optionalAttribute.setShareable(attributDTO.isShareable());
         }
-        if(!attribute.isShared()){
-            attribute.setShared(shared);
+        if(!optionalAttribute.isShared()){
+            optionalAttribute.setShared(attributDTO.isShared());
         }
-        if(!attribute.isMeasurable()){
-            attribute.setMeasurable(measurable);
+        if(!optionalAttribute.isMeasurable()){
+            optionalAttribute.setMeasurable(attributDTO.isMeasurable());
         }
-        if(!attribute.isEntityDedicated()){
-            attribute.setEntityDedicated(isEntityDedicated);
+        if(!optionalAttribute.isEntityDedicated()){
+            optionalAttribute.setEntityDedicated(attributDTO.isEntityDedicated());
         }
-        attributeRepository.findAll();
     }
 
     public Attribute findAttributebyTitle(String title) {
@@ -103,7 +100,7 @@ public class AttributeService {
         return attribut;
     }
 
-    public Attribute findAttributebyId(Long attributeId) {
+    public Attribute findAttributebyId(UUID attributeId) {
         Attribute attribut = attributeRepository.findById(attributeId)
                 .orElseThrow(() -> new IllegalStateException(
                         "attribut with id " + attributeId + " does not exists"
@@ -112,7 +109,7 @@ public class AttributeService {
         return attribut;
     }
 
-    public List<Attribute> getAttributesByAttributeSetId(Long attributeSetId) {
+    public List<Attribute> getAttributesByAttributeSetId(UUID attributeSetId) {
 
         List<Attribute> attributes =  attributeRepository.findByAttributeSetId(attributeSetId)
                 .orElseThrow(() -> new IllegalStateException(

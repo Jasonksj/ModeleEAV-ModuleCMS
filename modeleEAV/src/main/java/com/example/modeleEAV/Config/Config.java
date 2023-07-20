@@ -41,18 +41,20 @@ public class Config {
             AttributeValue attributeValue4 = new AttributeValue("","","");
             AttributeValue attributeValue5 = new AttributeValue("","","");
             AttributeValue attributeValue6 = new AttributeValue("","","");
+            AttributeValue attributeValue7 = new AttributeValue();
+
 
             attributeValuesRepository.saveAll(List.of(attributeValue1, attributeValue2, attributeValue3, attributeValue4, attributeValue5, attributeValue6));
 
-            /*Attribute attribute7 = new Attribute("Volume","Volume du produit", AttributeType.Number,false,false,false,false,false,false,false,false);
+            Attribute attribute7 = new Attribute("Volume","Volume du produit", AttributeType.Number,false,false,false,false,false,false,false,false);
             Attribute attribute8 = new Attribute("Epaisseur","Epaisseur du produit");
-            */
+
             AttributeSet attributeSet1 = new AttributeSet("","","","",false,new ArrayList<>());
-            /*attribute7.setAttributeSet(attributeSet1);
+            attribute7.setAttributeSet(attributeSet1);
             attribute8.setAttributeSet(attributeSet1);
             attributeSet1.setAttributes(Arrays.asList(
                     attribute7,attribute8
-            ));*/
+            ));
 
             AttributeSet attributeSet2 = new AttributeSet("","",false,new ArrayList<>());
             AttributeSet attributeSet3 = new AttributeSet();

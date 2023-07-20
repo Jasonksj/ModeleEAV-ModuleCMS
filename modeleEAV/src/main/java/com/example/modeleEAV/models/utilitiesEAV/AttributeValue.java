@@ -1,18 +1,17 @@
 package com.example.modeleEAV.models.utilitiesEAV;
 
+import com.example.modeleEAV.models.Types.TString;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.CascadeType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+
 import java.time.LocalDate;
 import java.util.Date;
 
-@javax.persistence.Entity
 @Table
 @Getter
 @Setter
+@jakarta.persistence.Entity
 public class AttributeValue extends Entity {
     private String value;
     private boolean validated;
@@ -27,11 +26,6 @@ public class AttributeValue extends Entity {
             referencedColumnName = "id"
     )
     private Attribute attribute;
-
-
-    public AttributeValue(String title, String description) {
-        super(title, description);
-    }
 
     public AttributeValue(String title, String description, String value, boolean validated, String suffix, String symbol) {
         super(title, description);
@@ -52,5 +46,9 @@ public class AttributeValue extends Entity {
         this.validated = validated;
         this.suffix = suffix;
         this.symbol = symbol;
+    }
+
+    public AttributeValue() {
+        super(new String(), new String(), new String());
     }
 }

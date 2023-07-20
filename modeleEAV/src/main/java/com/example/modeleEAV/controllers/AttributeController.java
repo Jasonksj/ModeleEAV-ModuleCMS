@@ -1,9 +1,11 @@
 package com.example.modeleEAV.controllers;
 
+import com.example.modeleEAV.models.DTO.AttributDTO;
 import com.example.modeleEAV.models.utilitiesEAV.Attribute;
 import com.example.modeleEAV.models.utilitiesEAV.AttributeType;
 import com.example.modeleEAV.services.AttributeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,44 +26,29 @@ public class AttributeController {
         return attributeService.getAttributes();
     }
 
-    @GetMapping("/attributeTitle")
-    public List<Attribute> findAttributByTitle(){
-        return attributeService.findAttributByTitle();
-    }
-
     @GetMapping(path = "/search/{Str}")
     public List<Attribute> SearchAttributes(@PathVariable String Str){
         return attributeService.SearchAttributes(Str);
     }
     @PostMapping
-    public List<Attribute> registerNewAttribute(@RequestBody Attribute attribute){
+    public List<Attribute> registerNewAttribut(@RequestBody Attribute attribute){
         attributeService.addAttribute(attribute);
         return attributeService.getAttributes();
     }
 
     @DeleteMapping(path = "/attributes/{attributeId}")
-    public String DeleteAttribute(@PathVariable("attributeId") Long attributeId){
+    public String DeleteAttribute(@PathVariable("attributeId") UUID attributeId){
         attributeService.deleteAttribute(attributeId);
         return "Attribut " + attributeId + " supprimé avec succés" ;
     }
 
     @PutMapping(path = "/attributes/{attributeId}")
-    public List<Attribute> updateAttribute(
-            @PathVariable("attributeId") Long attributeId,
-            @RequestParam(required = false) String title,
-            @RequestParam(required = false) String description,
-            @RequestParam(required = false) AttributeType type,
-            @RequestParam(required = false) boolean requiredValue,
-            @RequestParam(required = false) boolean multipleValues,
-            @RequestParam(required = false) boolean freezeValues,
-            @RequestParam(required = false) boolean overriden,
-            @RequestParam(required = false) boolean shareable,
-            @RequestParam(required = false) boolean shared,
-            @RequestParam(required = false) boolean measurable,
-            @RequestParam(required = false) boolean isEntityDedicated
+    public ResponseEntity<Void> updateAttribute(
+            @PathVariable("attributeId") UUID attributeId,
+            @RequestBody AttributDTO attributDTO
     ) {
-        attributeService.updateAttribut(attributeId, title, description,type, requiredValue, multipleValues, freezeValues, overriden, shareable, shared, measurable, isEntityDedicated);
-        return attributeService.getAttributes();
+        attributeService.updateAttribut(attributeId, attributDTO);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping(path = "/attributes/{title}")
@@ -70,12 +57,12 @@ public class AttributeController {
     }
 
     @GetMapping(path = "/attribute/{attributeId}")
-    public Attribute FindAttributById(@PathVariable("attributeId") Long attributeId){
+    public Attribute FindAttributById(@PathVariable("attributeId") UUID attributeId){
         return attributeService.findAttributebyId(attributeId);
     }
 
     @GetMapping(path = "/attribut/{attributeId}")
-    public List<Attribute> getAttributesByAttributeSetId(Long attributeSetId) {
+    public List<Attribute> getAttributesByAttributeSetId(@PathVariable("attributeId") UUID attributeSetId) {
         return attributeService.getAttributesByAttributeSetId(attributeSetId);
     }
 

@@ -1,5 +1,6 @@
 package com.example.modeleEAV.services;
 
+import com.example.modeleEAV.models.DTO.AttributSetDTO;
 import com.example.modeleEAV.models.utilitiesEAV.AttributeSet;
 import com.example.modeleEAV.repositories.AttributeSetRepository;
 import lombok.Data;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 @Data
 @Service
@@ -29,7 +31,7 @@ public class AttributeSetService {
     }
 
 
-    public void deleteAttributeSet(Long attributeSetId) {
+    public void deleteAttributeSet(UUID attributeSetId) {
         boolean exists = attributeSetRepository.existsById(attributeSetId);
         if(!exists){
             throw new IllegalStateException(
@@ -41,32 +43,32 @@ public class AttributeSetService {
     }
 
     @Transactional
-    public void updateAttributSet(Long attributeSetId, String title, String description, String titleSet, String descriptionSet, boolean shareable) {
+    public void updateAttributSet(UUID attributeSetId, AttributSetDTO attributSetDTO) {
         AttributeSet attributeSet = attributeSetRepository.findById(attributeSetId)
                 .orElseThrow(() -> new IllegalStateException(
                         "AttributSet with id " + attributeSetId + " does not exists"
                 ));
-        if(title != null && title.length() > 0 && !Objects.equals(attributeSet.getTitle(), title)){
-            attributeSet.setTitle(title);
+
+        if(attributeSet.getTitle() != null && attributeSet.getTitle().length() > 0 ){
+            attributeSet.setTitle(attributSetDTO.getTitle());
         }
 
-        if(description != null && description.length() > 0 && !Objects.equals(attributeSet.getDescription(), description)){
-            attributeSet.setDescription(description);
+        if(attributeSet.getDescription() != null && attributeSet.getDescription().length() > 0 ){
+            attributeSet.setDescription(attributSetDTO.getDescription());
         }
 
-        if(titleSet != null && titleSet.length() > 0 && !Objects.equals(attributeSet.getTitleSet(), titleSet)){
-            attributeSet.setTitleSet(titleSet);
+        if(attributeSet.getTitleSet() != null && attributeSet.getTitleSet().length() > 0 ){
+            attributeSet.setTitleSet(attributSetDTO.getTitleSet());
         }
 
-        if(descriptionSet != null && descriptionSet.length() > 0 && !Objects.equals(attributeSet.getDescriptionSet(), descriptionSet)){
-            attributeSet.setDescriptionSet(descriptionSet);
+        if(attributeSet.getDescriptionSet() != null && attributeSet.getDescriptionSet().length() > 0 ){
+            attributeSet.setDescriptionSet(attributSetDTO.getDescriptionSet());
         }
 
         if(!attributeSet.isShareable()){
-            attributeSet.setShareable(shareable);
+            attributeSet.setShareable(attributSetDTO.isShareable());
         }
 
-        attributeSetRepository.findAll();
     }
 
     public AttributeSet findAttributeSetbyTitle(String title) {
@@ -78,7 +80,7 @@ public class AttributeSetService {
         return attributSet;
     }
 
-    public AttributeSet findAttributeSetbyId(Long id) {
+    public AttributeSet findAttributeSetbyId(UUID id) {
         AttributeSet attributSet = attributeSetRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException(
                         "AttributSet with id " + id + " does not exists"
@@ -87,7 +89,7 @@ public class AttributeSetService {
         return attributSet;
     }
 
-    public Optional<AttributeSet> findAttributeSetbyAttributId(Long attributSetId) {
+    public Optional<AttributeSet> findAttributeSetbyAttributId(UUID attributSetId) {
         return attributeSetRepository.findAttributeByAttributSetId(attributSetId);
     }
 }

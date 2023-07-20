@@ -12,7 +12,7 @@ import java.util.UUID;
 
 //public interface AttributeRepository extends JpaRepository<Attribute, UUID> {
 @Repository
-public interface AttributeRepository extends JpaRepository<Attribute, Long> {
+public interface AttributeRepository extends JpaRepository<Attribute, UUID> {
 
     @Query("SELECT s.title FROM Attribute s ")
     List<Attribute> findAttributeByTitle();
@@ -23,6 +23,6 @@ public interface AttributeRepository extends JpaRepository<Attribute, Long> {
             nativeQuery = true
     )
     Optional<List<Attribute>> findByAttributeSetId(
-            @Param("attributeSetId") Long attributeSetId
+            @Param("attributeSetId") UUID attributeSetId
     );
 }

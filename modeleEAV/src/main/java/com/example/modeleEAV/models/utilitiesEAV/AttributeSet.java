@@ -2,14 +2,14 @@ package com.example.modeleEAV.models.utilitiesEAV;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@javax.persistence.Entity
+@jakarta.persistence.Entity
 @Table
 @Getter
 @Setter
@@ -24,7 +24,7 @@ public class AttributeSet extends Entity{
             name = "attributeSet_id",
             referencedColumnName = "id"
     )
-    private List<Attribute> attributes = new ArrayList<>();
+    private List<Attribute> attributes;
 
     public AttributeSet(String title, String description) {
         super(title, description);

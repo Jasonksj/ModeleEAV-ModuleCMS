@@ -2,12 +2,12 @@ package com.example.modeleEAV.models.utilitiesEAV;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@javax.persistence.Entity
+@jakarta.persistence.Entity
 @Table
 @Getter
 @Setter
