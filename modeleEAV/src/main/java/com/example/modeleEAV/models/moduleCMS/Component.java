@@ -12,6 +12,7 @@ import java.util.List;
 
 
 @Entity
+@Table
 @Getter
 @Setter
 public class Component extends View{

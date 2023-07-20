@@ -218,7 +218,7 @@ public class EntityService {
     //9
     @Modifying
     @Transactional
-    public void addAttrInAttrSet(UUID setId, List<Attribute> attributes) {
+    public void  addAttrInAttrSet(UUID setId, List<Attribute> attributes) {
         Optional<AttributeSet> opt = attributeSetRepository.findById(setId);
         if (opt.isEmpty()) {
             throw new IllegalStateException(EMPTY);
