@@ -22,7 +22,7 @@ import java.util.List;
 @Table(
         name = "AttributeSet"
 )
-public class AttributeSet extends SuperEntity {
+public class AttributeSet extends Entity {
 
     private Boolean shareable;
 

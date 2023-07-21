@@ -1,7 +1,9 @@
 package com.SamyBodio.AEVCms.model.moduleCMS;
 
-
-import com.example.modeleEAV.models.utilitiesEAV.Entity;
+import com.SamyBodio.AEVCms.model.Entity;
+import com.SamyBodio.AEVCms.model.entity.Str.TString2;
+import com.SamyBodio.AEVCms.model.entity.TString;
+import com.SamyBodio.AEVCms.model.entity.User;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,12 +13,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PageRegion extends Entity {
-
-    public PageRegion(String title, String description) {
-        super(title, description);
+    public PageRegion() {
     }
 
-    public PageRegion(String slug, String title, String description) {
-        super(slug, title, description);
+    public PageRegion(String slug, TString title, TString2 description, User createBy, User updateBy, User deleteBy) {
+        super(slug, title, description, createBy, updateBy, deleteBy);
     }
+
+
 }

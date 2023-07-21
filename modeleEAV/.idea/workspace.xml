@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3f5c1ea1-a152-4320-863f-445596b63cf4" name="Changes" comment="moduleCms">
+      <change beforePath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/Controller/EntityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/Controller/EntityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/Service/EntityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/Service/EntityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/Attribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/Attribute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/AttributeSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/AttributeSet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/AttributeValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/AttributeValue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/SuperEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/Component.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/ComponentInComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/ComponentInComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/ComponentInPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/ComponentInPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/ComponentType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/ComponentType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/ContentType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/ContentType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/NestedComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/NestedComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/Page.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/PageRegion.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/PageRegion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/SEOData.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/SEOData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AEVCms/src/main/java/com/SamyBodio/AEVCms/model/moduleCMS/View.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="9ccd4124-4b38-40a4-affb-d8a4c6d11831" />
+        <option name="url" value="git@github.com:Jasonksj/ModeleEAV-ModuleCMS.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectId" id="2SBFEDqFXusObYbAZprckY5hRDn" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "last_opened_file_path": "C:/Users/Jason Kamsu/Documents/ModeleEAV-ModuleCMS/modeleEAV",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.modeleEAV.models" />
+      <recent name="com.example.modeleEAV.repositories" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Jason Kamsu\Documents\Java\modeleEAV\src\main\java\com\example\modeleEAV\models\moduleCMS" />
+      <recent name="C:\Users\Jason Kamsu\Documents\Java\modeleEAV\src\main\java\com\example\modeleEAV" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.example.modeleEAV.repositories" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ModeleEavApplication">
+    <configuration name="ModeleEavApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.modeleEAV.ModeleEavApplication" />
+      <module name="modeleEAV" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.modeleEAV.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AttributeRepositoryTest.saveAttribut" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="modeleEAV" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.modeleEAV.repositories.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.modeleEAV.repositories" />
+      <option name="MAIN_CLASS_NAME" value="com.example.modeleEAV.repositories.AttributeRepositoryTest" />
+      <option name="METHOD_NAME" value="saveAttribut" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ModeleEavApplication" />
+        <item itemvalue="JUnit.AttributeRepositoryTest.saveAttribut" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3f5c1ea1-a152-4320-863f-445596b63cf4" name="Changes" comment="" />
+      <created>1688611956567</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1688611956567</updated>
+    </task>
+    <task id="LOCAL-00001" summary="moduleCms">
+      <created>1689816969466</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1689816969466</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="moduleCms" />
+    <option name="LAST_COMMIT_MESSAGE" value="moduleCms" />
+  </component>
+</project>

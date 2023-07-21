@@ -1,9 +1,11 @@
 package com.SamyBodio.AEVCms.model.moduleCMS;
 
-
-import com.example.modeleEAV.models.utilitiesEAV.Attribute;
-import com.example.modeleEAV.models.utilitiesEAV.AttributeSet;
-import com.example.modeleEAV.models.utilitiesEAV.Entity;
+import com.SamyBodio.AEVCms.model.Attribute;
+import com.SamyBodio.AEVCms.model.AttributeSet;
+import com.SamyBodio.AEVCms.model.Entity;
+import com.SamyBodio.AEVCms.model.entity.Str.TString2;
+import com.SamyBodio.AEVCms.model.entity.TString;
+import com.SamyBodio.AEVCms.model.entity.User;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,17 +18,16 @@ import java.util.List;
 @Getter
 @Setter
 public class ComponentType extends Entity {
-    private AttributeSet attributeSets;
-    private Attribute[] attributes;
-    private String title;
-    private String description;
-    private List<Component> componentList;
+    //private AttributeSet attributeSets;
+    //private Attribute[] attributes;
+    private TString title;
+    private TString2 description;
+    //private List<Component> componentList;
 
-    public ComponentType(String title, String description) {
-        super(title, description);
-    }
 
-    public ComponentType(String slug, String title, String description) {
-        super(slug, title, description);
+    public ComponentType(String slug, TString title, TString2 description, User createBy, User updateBy, User deleteBy, TString title1, TString2 description1) {
+        super(slug, title, description, createBy, updateBy, deleteBy);
+        this.title = title1;
+        this.description = description1;
     }
 }

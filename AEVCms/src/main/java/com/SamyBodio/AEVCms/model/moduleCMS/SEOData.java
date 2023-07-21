@@ -1,7 +1,8 @@
 package com.SamyBodio.AEVCms.model.moduleCMS;
 
-import com.example.modeleEAV.models.utilitiesEAV.AttributeSet;
+import com.SamyBodio.AEVCms.model.AttributeSet;
+
 public abstract class SEOData {
-    AttributeSet[] seoattributes;
+    //AttributeSet[] seoattributes;
 
 }

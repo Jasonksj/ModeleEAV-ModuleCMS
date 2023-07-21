@@ -12,11 +12,5 @@ import java.util.UUID;
 
 @Repository
 public interface EntityRepository extends JpaRepository<Entity, UUID> {
-    @Modifying
-    @Transactional
-    @Query(value = "INSERT INTO entity_attribute(attribute_id,entity_id)" +
-            " VALUES(:attribute_id,:entity_id)",nativeQuery = true)
-    void insertEntityInAttribute(@Param("attribute_id") UUID attributeId,
-                                 @Param("entity_id") UUID entityId);
 
 }

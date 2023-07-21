@@ -17,10 +17,10 @@ import java.util.UUID;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class Entity {
+public abstract class Entity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID Entity_Id=UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID _Id;
 
     private String slug;
 
@@ -30,6 +30,7 @@ public class Entity {
     @Embedded
     private TString2 description;
 
+    @Temporal(TemporalType.DATE)
     private LocalDate createAt;
 
     @ManyToOne(
@@ -37,6 +38,7 @@ public class Entity {
     )
     private User createBy;
 
+    @Temporal(TemporalType.DATE)
     private LocalDate updateAt;
 
     @ManyToOne(
@@ -44,23 +46,13 @@ public class Entity {
     )
     private User updateBy;
 
+    @Temporal(TemporalType.DATE)
     private LocalDate deleteAt;
     @ManyToOne(
             cascade = CascadeType.ALL
     )
     private User deleteBy;
 
-    @ManyToMany(
-            cascade = CascadeType.ALL
-    )
-    @JoinTable(
-            name="Entity_Attribute",
-            joinColumns = @JoinColumn(name = "Entity_Id",
-            referencedColumnName = "Entity_Id"),
-            inverseJoinColumns = @JoinColumn(name = "attribute_id",
-                    referencedColumnName = "_Id")
-    )
-    private List<Attribute> attributes;
 
     public Entity(String slug, TString title, TString2 description, User createBy, User updateBy, User deleteBy) {
         this.slug = slug;
@@ -73,8 +65,5 @@ public class Entity {
         this.deleteAt = LocalDate.now();
         this.deleteBy = deleteBy;
     }
-    public void addAttribute(Attribute attribute){
-        if (attributes == null) attributes = new ArrayList<>();
-        attributes.add(attribute);
-    }
+
 }

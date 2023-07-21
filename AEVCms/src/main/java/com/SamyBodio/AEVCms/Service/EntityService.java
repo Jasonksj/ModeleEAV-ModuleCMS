@@ -89,6 +89,7 @@ public class EntityService {
         attribute1.setShared(attribute.getShared());
         attributeRepository.save(attribute1);
     }
+    /*
     //7
     @Modifying
     @Transactional
@@ -103,7 +104,9 @@ public class EntityService {
             attribute.setEntities(entities);
             attributeRepository.save(attribute);
 
-    }
+    }*/
+
+    /*
     //8
     public List<Entity> getEntityInAttribute(UUID str) {
         Optional<Attribute> Opt = attributeRepository.findById(str);
@@ -112,6 +115,7 @@ public class EntityService {
         }
         return Opt.get().getEntities();
     }
+    */
     //9
     public void createAttributeSet(AttributeSet attrSet, String name, String pwd) {
         User user = new User(name,pwd);
@@ -163,6 +167,7 @@ public class EntityService {
         return Opt.get().getAttributes();
     }
 
+    /*
     public List<Entity> getEntitiesOfAttribute(UUID attr) {
         Optional<Attribute>Opt = attributeRepository.findById(attr);
         if(Opt.isEmpty()){
@@ -171,7 +176,7 @@ public class EntityService {
         return Opt.get().getEntities();
     }
 
-    @Transactional
+    /*@Transactional
     public void addAttrInEntity(UUID entity, Attribute attribute) {
         Optional<Entity> Opt = entityRepository.findById(entity);
         if(Opt.isEmpty()){
@@ -213,7 +218,7 @@ public class EntityService {
         Entity entity1 = Opt2.get();
         attribute1.getEntities().remove(entity1);
         attributeRepository.save(attribute1);
-    }
+    }*/
 
     //9
     @Modifying

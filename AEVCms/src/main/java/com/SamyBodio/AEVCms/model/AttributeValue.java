@@ -18,7 +18,7 @@ import lombok.*;
 @Getter
 @Setter
 @jakarta.persistence.Entity
-public class AttributeValue extends SuperEntity {
+public class AttributeValue extends Entity {
     private String value;
     private Boolean validated;
     @Embedded
@@ -32,7 +32,7 @@ public class AttributeValue extends SuperEntity {
     )
     @JoinColumn(
             name = "attribute_id",
-            referencedColumnName = "identifier"
+            referencedColumnName = "_Id"
     )
     private Attribute attribute;
 

@@ -14,14 +14,14 @@ import java.util.List;
 import java.util.UUID;
 
 @jakarta.persistence.Entity
+@Table
 @ToString
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Attribute extends SuperEntity {
+public class Attribute extends Entity {
     private AttributeType type;
-    private Long identifier;
     private Boolean herited;
     private Boolean requiredValue;
     private Boolean multipleValues = true;
@@ -43,17 +43,17 @@ public class Attribute extends SuperEntity {
     private AttributeSet attributeSet;
 
     @OneToMany(
-            cascade = CascadeType.ALL,
-            mappedBy = "attribute"
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "AttributeValues_Id",
+            referencedColumnName = "_Id"
     )
     private List<AttributeValue> definedValues;
 
-    @ManyToMany(mappedBy = "attributes", cascade = CascadeType.ALL)
-    private List<Entity> entities;
 
     private boolean IsRequired;
     public Attribute(String slug,
-                     Long identifier,
                      TString title,
                      TString2 description,
                      User createBy,
@@ -66,18 +66,13 @@ public class Attribute extends SuperEntity {
                      Boolean isEntityDedicated) {
         super(slug,title,description,createBy,updateBy,deleteBy);
         this.type = type;
-        this.identifier = identifier;
         this.herited = herited;
         this.requiredValue = requiredValue;
         this.measurable = measurable;
-        this.entities= new ArrayList<>();
-        IsEntityDedicated = isEntityDedicated;
+        this.IsEntityDedicated = isEntityDedicated;
     }
 
     public void addPredifinedValues(List<AttributeValue> attributeValue){
         this.definedValues.addAll(attributeValue);
-    }
-    public void addEntity(Entity entity){
-        this.entities.add(entity);
     }
 }

@@ -94,6 +94,7 @@ public class EntityController {
     }
     /*----------------------------------Entity - Attribute---------------------------------------*/
 
+    /*
     @PutMapping(path = "/entity")
     public ResponseEntity<String> addEntityInAttribute(@RequestParam UUID str, @RequestBody List<Entity>  entity){
         entityService.addEntityInAttribute(str,entity);
@@ -104,15 +105,19 @@ public class EntityController {
     public List<Entity> getEntityInAttribute(@PathVariable UUID str){
         return entityService.getEntityInAttribute(str);
     }
+    /*
     @DeleteMapping(path ="/entity/{str}" )
     public ResponseEntity<String> deleteEntityInAttribute(@PathVariable UUID attribute, @RequestParam String Entity){
         entityService.deleteEntityInAttribute(attribute,Entity);
         return ResponseEntity.ok("Suppression reussie");
     }//false
+    */
+    /*
     @GetMapping(path = "/entityAttr/{entity}")
     public List<Entity> getEntitiesOfAttribute(@PathVariable UUID attr){
         return entityService.getEntitiesOfAttribute(attr);
     }
+    /*
     @PutMapping(path = "/entityAttr/{entity}")
     public ResponseEntity<String> addAttrInEntity(@PathVariable UUID IdEntity,@RequestParam Attribute attribute){
         entityService.addAttrInEntity(IdEntity,attribute);
@@ -123,5 +128,6 @@ public class EntityController {
         entityService.deleteAttrInEntity(attr,str);
         return ResponseEntity.ok(REUSSIE);
     }
+    */
 
 }
