@@ -1,10 +1,7 @@
 package com.SamyBodio.AEVCms.Service;
 
 import com.SamyBodio.AEVCms.Repository.*;
-import com.SamyBodio.AEVCms.model.Attribute;
-import com.SamyBodio.AEVCms.model.AttributeSet;
-import com.SamyBodio.AEVCms.model.AttributeValue;
-import com.SamyBodio.AEVCms.model.Entity;
+import com.SamyBodio.AEVCms.model.*;
 import com.SamyBodio.AEVCms.model.entity.User;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +28,9 @@ public class EntityService {
     private UserRepository userRepository;
     @Autowired
     private EntityRepository entityRepository;
+
+    @Autowired
+    private EntityTypeRepository entityTypeRepository;
     //1
     @Transactional
     public void CreateAttributes(User user, Attribute attribute,List<AttributeValue>  attributeValue) {
@@ -53,6 +53,7 @@ public class EntityService {
                 S.getDescription().getEnglish2().contains(str) ||
                 S.getCreateBy().toString().contains(str)).toList();
     }
+    //j'ai envoye le dossier de Tstring2 sur Telegram recupere le de ton cote et met le dans Entity
     //4
     @Transactional
     public void DeleteAttributes(UUID id) {
@@ -165,6 +166,37 @@ public class EntityService {
             throw new IllegalStateException(EMPTY);
         }
         return Opt.get().getAttributes();
+    }
+
+    public List<Entity_Type> getAttributeEntity_type(UUID attribut) {
+        Optional<Attribute> Opt = attributeRepository.findById(attribut);
+        if(Opt.isEmpty()){
+            throw new IllegalStateException(EMPTY);
+        }
+        return Opt.get().getEntityTypeList();
+    }
+
+    @Transactional
+    public void deleteEntity_typeinAttribut(UUID attribut, UUID entity_type) {
+        Optional<Entity_Type> Opt = entityTypeRepository.findById(entity_type);
+        Optional<Attribute>Opt2 = attributeRepository.findById(attribut);
+        if(Opt2.isEmpty() || Opt.isEmpty()){
+            throw new IllegalStateException(EMPTY);
+        }
+        Entity_Type entity1 = Opt.get();
+        Attribute attribute = Opt2.get();
+        attribute.getEntityTypeList().remove(entity1);
+        entityTypeRepository.save(entity1);
+    }
+
+    @Transactional
+    public void addEntity_tyêInAttribut(UUID attribut, Entity_Type entity_type) {
+        Optional<Attribute> Opt = attributeRepository.findById(attribut);
+        if(Opt.isEmpty()){
+            throw new IllegalStateException(EMPTY);
+        }
+        Opt.get().getEntityTypeList().add(entity_type);
+        entityRepository.save(Opt.get());
     }
 
     /*

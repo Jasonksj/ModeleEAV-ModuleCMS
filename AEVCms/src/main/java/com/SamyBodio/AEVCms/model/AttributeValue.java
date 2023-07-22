@@ -1,11 +1,7 @@
 package com.SamyBodio.AEVCms.model;
 
 
-import com.SamyBodio.AEVCms.model.entity.Str.TString2;
-import com.SamyBodio.AEVCms.model.entity.Str.TString3;
-import com.SamyBodio.AEVCms.model.entity.Str.TString4;
-import com.SamyBodio.AEVCms.model.entity.TString;
-import com.SamyBodio.AEVCms.model.entity.User;
+import com.SamyBodio.AEVCms.model.entity.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;

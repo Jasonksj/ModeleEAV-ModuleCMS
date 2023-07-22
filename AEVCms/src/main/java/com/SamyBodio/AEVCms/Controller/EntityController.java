@@ -92,6 +92,11 @@ public class EntityController {
     public AttributeSet getAttributeSetInfo(@PathVariable UUID attrSet){
         return entityService.getAttributeSetInfo(attrSet);
     }
+
+    @GetMapping(path = "/attr/entity_type/{attr}")
+    public List<Entity_Type> getEntityTypeOfAttribute(@PathVariable("attr") UUID attr){
+        return entityService.getAttributeEntity_type(attr);
+    }
     /*----------------------------------Entity - Attribute---------------------------------------*/
 
     /*
@@ -117,17 +122,17 @@ public class EntityController {
     public List<Entity> getEntitiesOfAttribute(@PathVariable UUID attr){
         return entityService.getEntitiesOfAttribute(attr);
     }
-    /*
+    */
     @PutMapping(path = "/entityAttr/{entity}")
-    public ResponseEntity<String> addAttrInEntity(@PathVariable UUID IdEntity,@RequestParam Attribute attribute){
-        entityService.addAttrInEntity(IdEntity,attribute);
+    public ResponseEntity<String> addEntity_tyêInAttribut(@PathVariable UUID attribuId,@RequestParam Entity_Type entity_type){
+        entityService.addEntity_tyêInAttribut(attribuId,entity_type);
         return ResponseEntity.ok("Mise a jour reussi");
     }
     @DeleteMapping(path = "/entityAttr/{entity}")
-    public ResponseEntity<String> deleteAttrInEntity(@PathVariable UUID attr,@RequestParam String str){
-        entityService.deleteAttrInEntity(attr,str);
+    public ResponseEntity<String> deleteEntity_typeinAttribut(@PathVariable UUID attr,@RequestParam UUID ent){
+        entityService.deleteEntity_typeinAttribut(attr,ent);
         return ResponseEntity.ok(REUSSIE);
     }
-    */
+
 
 }
