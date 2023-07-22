@@ -36,7 +36,7 @@ public class AttributeSet extends Entity {
                        @Nullable User updateBy,
                        @Nullable User deleteBy,
                        TString title,
-                       TString2 description,
+                       TString description,
                        Boolean shareable) {
         super(slug,title,description,createBy,updateBy,deleteBy);
         this.shareable = shareable;

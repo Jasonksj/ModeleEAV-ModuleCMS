@@ -2,7 +2,6 @@ package com.SamyBodio.AEVCms.model;
 
 import com.SamyBodio.AEVCms.model.entity.Jsonconverter;
 import com.SamyBodio.AEVCms.model.entity.TString;
-import com.SamyBodio.AEVCms.model.entity.TString2;
 import com.SamyBodio.AEVCms.model.entity.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
@@ -11,13 +10,14 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
-@jakarta.persistence.Entity
+//@jakarta.persistence.Entity
+@MappedSuperclass
 @NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
-public abstract class Entity {
+public class Entity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID _Id;
@@ -25,12 +25,11 @@ public abstract class Entity {
     private String slug;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
-    @Converter(converter = Jsonconverter.class)
-    //merci
+    @Convert(converter = Jsonconverter.class)
     private TString title;
-    @Embedded
-    @Column(columnDefinition = "json")
-    private TString2 description;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @Convert(converter = Jsonconverter.class)
+    private TString description;
 
     @Temporal(TemporalType.DATE)
     private LocalDate createAt;
@@ -56,7 +55,7 @@ public abstract class Entity {
     private User deleteBy;
 
 
-    public Entity(String slug, TString title, TString2 description, User createBy, User updateBy, User deleteBy) {
+    public Entity(String slug, TString title, TString description, User createBy, User updateBy, User deleteBy) {
         this.slug = slug;
         this.title = title;
         this.description = description;

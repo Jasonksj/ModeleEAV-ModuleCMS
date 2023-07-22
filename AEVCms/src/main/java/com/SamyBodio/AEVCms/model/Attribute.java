@@ -63,7 +63,7 @@ public class Attribute extends Entity {
     private boolean IsRequired;
     public Attribute(String slug,
                      TString title,
-                     TString2 description,
+                     TString description,
                      User createBy,
                      User updateBy,
                      User deleteBy,

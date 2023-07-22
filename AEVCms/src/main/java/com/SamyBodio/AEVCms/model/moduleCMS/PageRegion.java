@@ -16,7 +16,7 @@ public class PageRegion extends Entity {
     public PageRegion() {
     }
 
-    public PageRegion(String slug, TString title, TString2 description, User createBy, User updateBy, User deleteBy) {
+    public PageRegion(String slug, TString title, TString description, User createBy, User updateBy, User deleteBy) {
         super(slug, title, description, createBy, updateBy, deleteBy);
     }
 

@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import com.SamyBodio.AEVCms.model.Entity;
 
@@ -20,6 +21,7 @@ import java.util.List;
 @Table
 @Getter
 @Setter
+@NoArgsConstructor
 public class Application extends Entity {
     private String logo;
     private String slogan;
@@ -33,7 +35,7 @@ public class Application extends Entity {
     )
     private List<View> viewList;
 
-    public Application(String slug, TString title, TString2 description, User createBy, User updateBy, User deleteBy, String logo, String slogan) {
+    public Application(String slug, TString title, TString description, User createBy, User updateBy, User deleteBy, String logo, String slogan) {
         super(slug, title, description, createBy, updateBy, deleteBy);
         this.logo = logo;
         this.slogan = slogan;

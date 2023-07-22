@@ -47,10 +47,10 @@ public class EntityService {
     }
     //3 ame
     public List<Attribute> SearchAttributes(String str) {
-        return attributeRepository.findAll().stream().filter(S-> S.getTitle().getFrench().contains(str) ||
-                S.getTitle().getEnglish().contains(str) ||
-                S.getDescription().getFrench2().contains(str)||
-                S.getDescription().getEnglish2().contains(str) ||
+        return attributeRepository.findAll().stream().filter(S-> S.getTitle().getFr().contains(str) ||
+                S.getTitle().getEn().contains(str) ||
+                S.getDescription().getFr().contains(str)||
+                S.getDescription().getEn().contains(str) ||
                 S.getCreateBy().toString().contains(str)).toList();
     }
     //j'ai envoye le dossier de Tstring2 sur Telegram recupere le de ton cote et met le dans Entity
@@ -140,10 +140,10 @@ public class EntityService {
             throw new IllegalStateException("Is Empty");
         }
         AttributeSet attributeSet1 = Opt.get();
-        attributeSet1.getTitle().setFrench(attributeSet.getTitle().getFrench());
-        attributeSet1.getTitle().setEnglish(attributeSet.getTitle().getEnglish());
-        attributeSet1.getDescription().setFrench2(attributeSet.getDescription().getFrench2());
-        attributeSet1.getDescription().setEnglish2(attributeSet.getDescription().getEnglish2());
+        attributeSet1.getTitle().setFr(attributeSet.getTitle().getFr());
+        attributeSet1.getTitle().setEn(attributeSet.getTitle().getEn());
+        attributeSet1.getDescription().setFr(attributeSet.getDescription().getFr());
+        attributeSet1.getDescription().setEn(attributeSet.getDescription().getEn());
         attributeSet1.setShareable(attributeSet.getShareable());
         attributeSetRepository.save(attributeSet);
     }

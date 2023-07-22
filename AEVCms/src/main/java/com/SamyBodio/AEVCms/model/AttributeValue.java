@@ -2,11 +2,9 @@ package com.SamyBodio.AEVCms.model;
 
 
 import com.SamyBodio.AEVCms.model.entity.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 @NoArgsConstructor
@@ -17,10 +15,12 @@ import lombok.*;
 public class AttributeValue extends Entity {
     private String value;
     private Boolean validated;
-    @Embedded
-    private TString3 suffix;
-    @Embedded
-    private TString4 symbol;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @Convert(converter = Jsonconverter.class)
+    private TString suffix;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @Convert(converter = Jsonconverter.class)
+    private TString symbol;
 
     @JsonIgnore
     @ManyToOne(
@@ -32,8 +32,8 @@ public class AttributeValue extends Entity {
     )
     private Attribute attribute;
 
-    public AttributeValue(String slug, TString title, TString2 description, User createBy, User updateBy, User deleteBy,
-                          String value, Boolean validated, TString3 suffix, TString4 symbol) {
+    public AttributeValue(String slug, TString title, TString description, User createBy, User updateBy, User deleteBy,
+                          String value, Boolean validated, TString suffix, TString symbol) {
         super(slug, title, description, createBy, updateBy, deleteBy);
         this.value = value;
         this.validated = validated;

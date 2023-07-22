@@ -7,6 +7,7 @@ import com.SamyBodio.AEVCms.model.entity.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.awt.*;
@@ -16,8 +17,9 @@ import java.util.List;
 @Table
 @Getter
 @Setter
+@NoArgsConstructor
 public class View extends Application{
-    public View(String slug, TString title, TString2 description, User createBy, User updateBy, User deleteBy, String logo, String slogan) {
+    public View(String slug, TString title, TString description, User createBy, User updateBy, User deleteBy, String logo, String slogan) {
         super(slug, title, description, createBy, updateBy, deleteBy, logo, slogan);
     }
     //private Attribute[] attributes;

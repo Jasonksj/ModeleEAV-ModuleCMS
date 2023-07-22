@@ -16,7 +16,7 @@ import java.awt.*;
 @Setter
 public class ContentType extends Component {
 
-    public ContentType(String slug, TString title, TString2 description, User createBy, User updateBy, User deleteBy, String logo, String slogan) {
+    public ContentType(String slug, TString title, TString description, User createBy, User updateBy, User deleteBy, String logo, String slogan) {
         super(slug, title, description, createBy, updateBy, deleteBy, logo, slogan);
     }
 }

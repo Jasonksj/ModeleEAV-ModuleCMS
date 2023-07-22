@@ -23,11 +23,11 @@ public class ComponentType extends Entity {
     //private AttributeSet attributeSets;
     //private Attribute[] attributes;
     private TString title;
-    private TString2 description;
+    private TString description;
     //private List<Component> componentList;
 
 
-    public ComponentType(String slug, TString title, TString2 description, User createBy, User updateBy, User deleteBy, TString title1, TString2 description1) {
+    public ComponentType(String slug, TString title, TString description, User createBy, User updateBy, User deleteBy, TString title1, TString description1) {
         super(slug, title, description, createBy, updateBy, deleteBy);
         this.title = title1;
         this.description = description1;

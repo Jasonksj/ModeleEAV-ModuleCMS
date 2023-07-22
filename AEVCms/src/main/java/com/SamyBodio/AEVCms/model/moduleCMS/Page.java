@@ -28,7 +28,7 @@ public class Page extends View {
     private List<Component> componentList;
 
 
-    public Page(String slug, TString title, TString2 description, User createBy, User updateBy, User deleteBy, String logo, String slogan) {
+    public Page(String slug, TString title, TString description, User createBy, User updateBy, User deleteBy, String logo, String slogan) {
         super(slug, title, description, createBy, updateBy, deleteBy, logo, slogan);
     }
 }

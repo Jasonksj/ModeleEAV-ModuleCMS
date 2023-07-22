@@ -5,20 +5,19 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Embeddable
 @Getter
 @Setter
 @ToString
 public class TString {
-    private String French;
-    private String English;
+    private String Fr;
+    private String En;
 
     public TString() {
     }
 
     public TString(String french, String english) {
-        French = french;
-        English = english;
+        Fr = french;
+        En = english;
     }
 
 }
