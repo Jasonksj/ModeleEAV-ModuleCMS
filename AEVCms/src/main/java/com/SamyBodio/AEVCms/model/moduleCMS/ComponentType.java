@@ -8,6 +8,7 @@ import com.SamyBodio.AEVCms.model.entity.TString;
 import com.SamyBodio.AEVCms.model.entity.User;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 @Table
 @Getter
 @Setter
+@NoArgsConstructor
 public class ComponentType extends Entity {
     //private AttributeSet attributeSets;
     //private Attribute[] attributes;

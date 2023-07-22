@@ -96,7 +96,7 @@ public class EntityController {
 
     /*
     @PutMapping(path = "/entity")
-    public ResponseEntity<String> addEntityInAttribute(@RequestParam UUID str, @RequestBody List<Entity>  entity){
+    public ResponseEntity<String>tu addEntityInAttribute(@RequestParam UUID str, @RequestBody List<Entity>  entity){
         entityService.addEntityInAttribute(str,entity);
         return ResponseEntity.ok("Insertion reussi");
     }//false
