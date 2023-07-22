@@ -1,14 +1,14 @@
 package com.SamyBodio.AEVCms.model;
 
-import com.SamyBodio.AEVCms.model.entity.Str.TString2;
+import com.SamyBodio.AEVCms.model.entity.Jsonconverter;
 import com.SamyBodio.AEVCms.model.entity.TString;
+import com.SamyBodio.AEVCms.model.entity.TString2;
 import com.SamyBodio.AEVCms.model.entity.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @jakarta.persistence.Entity
@@ -24,10 +24,12 @@ public abstract class Entity {
 
     private String slug;
 
-    @Embedded
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @Converter(converter = Jsonconverter.class)
+    //merci
     private TString title;
-
     @Embedded
+    @Column(columnDefinition = "json")
     private TString2 description;
 
     @Temporal(TemporalType.DATE)

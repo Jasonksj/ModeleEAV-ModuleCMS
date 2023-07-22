@@ -1,7 +1,6 @@
 package com.SamyBodio.AEVCms.model;
 
 import com.SamyBodio.AEVCms.model.entity.*;
-import com.SamyBodio.AEVCms.model.entity.Str.TString2;
 import com.SamyBodio.AEVCms.model.entity.User;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.CascadeType;

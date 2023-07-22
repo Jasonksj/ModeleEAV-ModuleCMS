@@ -1,4 +1,4 @@
-package com.SamyBodio.AEVCms.model.entity.Str;
+package com.SamyBodio.AEVCms.model.entity;
 
 import jakarta.persistence.Embeddable;
 import lombok.Getter;

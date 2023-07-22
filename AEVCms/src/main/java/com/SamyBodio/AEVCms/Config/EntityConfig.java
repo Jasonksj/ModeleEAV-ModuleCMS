@@ -5,7 +5,7 @@ import com.SamyBodio.AEVCms.Repository.AttributeRepository;
 import com.SamyBodio.AEVCms.Repository.UserRepository;
 import com.SamyBodio.AEVCms.model.Attribute;
 import com.SamyBodio.AEVCms.model.AttributeType;
-import com.SamyBodio.AEVCms.model.entity.Str.TString2;
+import com.SamyBodio.AEVCms.model.entity.TString2;
 import com.SamyBodio.AEVCms.model.entity.TString;
 import com.SamyBodio.AEVCms.model.entity.User;
 import org.springframework.boot.CommandLineRunner;

@@ -1,8 +1,8 @@
 package com.SamyBodio.AEVCms.model;
 
 
-import com.SamyBodio.AEVCms.model.entity.Str.TString2;
 import com.SamyBodio.AEVCms.model.entity.TString;
+import com.SamyBodio.AEVCms.model.entity.TString2;
 import com.SamyBodio.AEVCms.model.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.Nullable;
@@ -50,6 +50,14 @@ public class Attribute extends Entity {
             referencedColumnName = "_Id"
     )
     private List<AttributeValue> definedValues;
+    @OneToMany(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name = "AttributeValues_Id",
+            referencedColumnName = "_Id"
+    )
+    private List<Entity_Type> entityTypeList;
 
 
     private boolean IsRequired;
