@@ -14,12 +14,11 @@ import java.util.List;
 import java.util.UUID;
 
 @jakarta.persistence.Entity
-@Table
 @ToString
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode
 public class Attribute extends Entity {
     private AttributeType type;
     private Boolean herited;
@@ -73,6 +72,8 @@ public class Attribute extends Entity {
                      Boolean measurable,
                      Boolean isEntityDedicated) {
         super(slug,title,description,createBy,updateBy,deleteBy);
+        this.title = title;
+        this.description = description;
         this.type = type;
         this.herited = herited;
         this.requiredValue = requiredValue;

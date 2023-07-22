@@ -6,7 +6,6 @@ import com.SamyBodio.AEVCms.model.entity.User;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -47,11 +46,12 @@ public class EntityService {
     }
     //3 ame
     public List<Attribute> SearchAttributes(String str) {
-        return attributeRepository.findAll().stream().filter(S-> S.getTitle().getFr().contains(str) ||
-                S.getTitle().getEn().contains(str) ||
-                S.getDescription().getFr().contains(str)||
-                S.getDescription().getEn().contains(str) ||
-                S.getCreateBy().toString().contains(str)).toList();
+        //System.out.println();
+        return attributeRepository.findAll().stream().filter(s -> s.getTitle().getFr().contains(str) ||
+                s.getTitle().getEn().contains(str) ||
+                s.getDescription().getFr().contains(str)||
+                s.getDescription().getEn().contains(str) ||
+                s.getCreateBy().toString().contains(str)).toList();
     }
     //j'ai envoye le dossier de Tstring2 sur Telegram recupere le de ton cote et met le dans Entity
     //4
@@ -123,6 +123,10 @@ public class EntityService {
         attrSet.setCreateBy(user);
         attrSet.setDeleteBy(user);
         attrSet.setUpdateBy(user);
+        List<Attribute> attributes = attrSet.getAttributes();
+        for (Attribute attribute:attributes) {
+            attribute.setAttributeSet(attrSet);
+        }
         attributeSetRepository.save(attrSet);
     }
 
@@ -145,7 +149,8 @@ public class EntityService {
         attributeSet1.getDescription().setFr(attributeSet.getDescription().getFr());
         attributeSet1.getDescription().setEn(attributeSet.getDescription().getEn());
         attributeSet1.setShareable(attributeSet.getShareable());
-        attributeSetRepository.save(attributeSet);
+        attributeSet1.setAttributes(attributeSet.getAttributes());
+        attributeSetRepository.save(attributeSet1);
     }
 
     public List<AttributeSet> getAllAttributeSet() {
