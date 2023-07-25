@@ -109,8 +109,9 @@ public class EntityController {
         return ResponseEntity.ok("Ajout reussi");
     }
 
-    @PutMapping(path = "/removeEntityTypeFromAttribute/{Id}")
-    public ResponseEntity<String> removeEntityTypeFromAttribute(@PathVariable("Id") UUID attributeId,@RequestParam UUID EntityTypeId) throws Exception {
+    @PutMapping(path = "/removeEntityTypeFromAttribute/{IdAttribute}/{IdEntityType}")
+    public ResponseEntity<String> removeEntityTypeFromAttribute(@PathVariable("IdAttribute") UUID attributeId,
+                                                                @PathVariable("IdEntityType") UUID EntityTypeId) throws Exception {
         entityService.removeEntityTypeFromAttribute(attributeId,EntityTypeId);
         return ResponseEntity.ok("Suppression reussi");
     }

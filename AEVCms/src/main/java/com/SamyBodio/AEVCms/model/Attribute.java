@@ -8,6 +8,7 @@ import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @jakarta.persistence.Entity
@@ -39,7 +40,7 @@ public class Attribute extends SuperEntity {
     )
     private AttributeSet attributeSet;
 
-
+    @JsonIgnore
     @OneToMany(
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER
@@ -49,10 +50,10 @@ public class Attribute extends SuperEntity {
             referencedColumnName = "_Id"
     )
     @ToString.Exclude
-    private List<AttributeValue> definedValues;
+    private List<AttributeValue> definedValues = new ArrayList<>();
 
 
-    @JsonIgnore(value = false)
+    @JsonIgnore
     @ManyToMany(
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER
@@ -63,25 +64,28 @@ public class Attribute extends SuperEntity {
             inverseJoinColumns = @JoinColumn(name = "entity_Id",referencedColumnName = "_Id")
     )
     @ToString.Exclude
-    private List<Entity> entityList;
+    private List<Entity> entityList = new ArrayList<>();
 
-    @JsonIgnore(value = false)
-    @ManyToMany
+    @JsonIgnore
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
     @JoinTable(
             name = "attribute_entity_type",
             joinColumns = @JoinColumn(name = "attribute_id",referencedColumnName = "_Id"),
             inverseJoinColumns = @JoinColumn(name = "entity_type_id",referencedColumnName = "id")
     )
     @ToString.Exclude
-    private List<Entity_Type> entityTypes;
+    private List<Entity_Type> entityTypes = new ArrayList<>();
 
 
     private boolean IsRequired;
 
     public Attribute(@Nullable String slug, @Nullable User createBy, @Nullable User updateBy, @Nullable User deleteBy, TString title,
                      TString description, AttributeType type, Boolean herited, Boolean requiredValue, Boolean multipleValues,
-                     Boolean freezeValues, Boolean overriden, Boolean shareable, Boolean shared, Boolean measurable, Boolean isEntityDedicated,
-                     boolean isRequired) {
+                     Boolean freezeValues, Boolean overriden, Boolean shareable, Boolean shared, Boolean measurable,
+                     Boolean isEntityDedicated, AttributeSet attributeSet, boolean isRequired) {
         super(slug, createBy, updateBy, deleteBy, title, description);
         this.type = type;
         this.herited = herited;
@@ -93,6 +97,7 @@ public class Attribute extends SuperEntity {
         this.shared = shared;
         this.measurable = measurable;
         IsEntityDedicated = isEntityDedicated;
+        this.attributeSet = attributeSet;
         IsRequired = isRequired;
     }
 

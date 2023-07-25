@@ -35,8 +35,6 @@ public class EntityService {
     public void CreateAttributes(User user, Attribute attribute) {
         attribute.setCreateBy(user);
         List<AttributeValue> attributeValue = attribute.getDefinedValues();
-       // attribute.getAttributeSet().setAttributes(List.of(attribute));
-       // attribute.setAttributeSet(attribute.getAttributeSet());
         for(AttributeValue attributeValue1: attributeValue){
            attributeValue1.setAttribute(attribute);
         }
@@ -203,6 +201,9 @@ public class EntityService {
     }
 
     public void createEntityType(Entity_Type entityType) {
+        for (Attribute attribute:entityType.getAttributes()) {
+            attribute.getEntityTypes().add(entityType);
+        }
         entityTypeRepository.save(entityType);
     }
 
