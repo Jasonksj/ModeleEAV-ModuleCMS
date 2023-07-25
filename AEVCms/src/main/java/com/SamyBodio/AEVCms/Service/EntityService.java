@@ -3,6 +3,7 @@ package com.SamyBodio.AEVCms.Service;
 import com.SamyBodio.AEVCms.Repository.*;
 import com.SamyBodio.AEVCms.model.*;
 import com.SamyBodio.AEVCms.model.entity.User;
+import jakarta.annotation.Nullable;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
@@ -27,13 +28,15 @@ public class EntityService {
     private UserRepository userRepository;
     @Autowired
     private EntityRepository entityRepository;
-
     @Autowired
     private EntityTypeRepository entityTypeRepository;
-    //1
+
     @Transactional
-    public void CreateAttributes(User user, Attribute attribute,List<AttributeValue>  attributeValue) {
+    public void CreateAttributes(User user, Attribute attribute) {
         attribute.setCreateBy(user);
+        List<AttributeValue> attributeValue = attribute.getDefinedValues();
+       // attribute.getAttributeSet().setAttributes(List.of(attribute));
+       // attribute.setAttributeSet(attribute.getAttributeSet());
         for(AttributeValue attributeValue1: attributeValue){
            attributeValue1.setAttribute(attribute);
         }
@@ -47,11 +50,11 @@ public class EntityService {
     //3 ame
     public List<Attribute> SearchAttributes(String str) {
         //System.out.println();
-        return attributeRepository.findAll().stream().filter(s -> s.getTitle().getFr().contains(str) ||
-                s.getTitle().getEn().contains(str) ||
-                s.getDescription().getFr().contains(str)||
-                s.getDescription().getEn().contains(str) ||
-                s.getCreateBy().toString().contains(str)).toList();
+        return attributeRepository.findAll().stream().filter(
+                s -> s.toString().contains(str) ||
+                s.getTitle().toString().contains(str) ||
+                s.getDescription().toString().contains(str) ||
+                s.getCreateBy().toString().contains(str)).toList() ;
     }
     //j'ai envoye le dossier de Tstring2 sur Telegram recupere le de ton cote et met le dans Entity
     //4
@@ -90,35 +93,9 @@ public class EntityService {
         attribute1.setShared(attribute.getShared());
         attributeRepository.save(attribute1);
     }
-    /*
-    //7
-    @Modifying
-    @Transactional
-    public void addEntityInAttribute(UUID id,@NonNull List<Entity> entities) {
-        Optional<Attribute> Opt = attributeRepository.findById(id);
-        if(Opt.isEmpty()){
-            throw new IllegalStateException("Attribute with Id "+id+ NOT_EXISTS);
-        }
-        Attribute attribute = Opt.get();
 
-            entityRepository.saveAll(entities);
-            attribute.setEntities(entities);
-            attributeRepository.save(attribute);
-
-    }*/
-
-    /*
-    //8
-    public List<Entity> getEntityInAttribute(UUID str) {
-        Optional<Attribute> Opt = attributeRepository.findById(str);
-        if(Opt.isEmpty()){
-            throw new IllegalStateException("Attribute with title "+str+ NOT_EXISTS);
-        }
-        return Opt.get().getEntities();
-    }
-    */
     //9
-    public void createAttributeSet(AttributeSet attrSet, String name, String pwd) {
+    public void createAttributeSet(AttributeSet attrSet, @Nullable String name,@Nullable String pwd) {
         User user = new User(name,pwd);
         attrSet.setCreateBy(user);
         attrSet.setDeleteBy(user);
@@ -173,91 +150,6 @@ public class EntityService {
         return Opt.get().getAttributes();
     }
 
-    public List<Entity_Type> getAttributeEntity_type(UUID attribut) {
-        Optional<Attribute> Opt = attributeRepository.findById(attribut);
-        if(Opt.isEmpty()){
-            throw new IllegalStateException(EMPTY);
-        }
-        return Opt.get().getEntityTypeList();
-    }
-
-    @Transactional
-    public void deleteEntity_typeinAttribut(UUID attribut, UUID entity_type) {
-        Optional<Entity_Type> Opt = entityTypeRepository.findById(entity_type);
-        Optional<Attribute>Opt2 = attributeRepository.findById(attribut);
-        if(Opt2.isEmpty() || Opt.isEmpty()){
-            throw new IllegalStateException(EMPTY);
-        }
-        Entity_Type entity1 = Opt.get();
-        Attribute attribute = Opt2.get();
-        attribute.getEntityTypeList().remove(entity1);
-        entityTypeRepository.save(entity1);
-    }
-
-    @Transactional
-    public void addEntity_tyêInAttribut(UUID attribut, Entity_Type entity_type) {
-        Optional<Attribute> Opt = attributeRepository.findById(attribut);
-        if(Opt.isEmpty()){
-            throw new IllegalStateException(EMPTY);
-        }
-        Opt.get().getEntityTypeList().add(entity_type);
-        entityRepository.save(Opt.get());
-    }
-
-    /*
-    public List<Entity> getEntitiesOfAttribute(UUID attr) {
-        Optional<Attribute>Opt = attributeRepository.findById(attr);
-        if(Opt.isEmpty()){
-            throw new IllegalStateException(EMPTY);
-        }
-        return Opt.get().getEntities();
-    }
-
-    /*@Transactional
-    public void addAttrInEntity(UUID entity, Attribute attribute) {
-        Optional<Entity> Opt = entityRepository.findById(entity);
-        if(Opt.isEmpty()){
-            throw new IllegalStateException(EMPTY);
-        }
-        Opt.get().getAttributes().add(attribute);
-        entityRepository.save(Opt.get());
-    }
-
-    @Transactional
-    public void deleteAttrInEntity(UUID entity, String title) {
-        Optional<Entity> Opt = entityRepository.findById(entity);
-        Optional<Attribute>Opt2 = attributeRepository.findByTitle(title);
-        if(Opt2.isEmpty() || Opt.isEmpty()){
-            throw new IllegalStateException(EMPTY);
-        }
-        Entity entity1 = Opt.get();
-        Attribute attribute = Opt2.get();
-        entity1.getAttributes().remove(attribute);
-        entityRepository.save(entity1);
-    }
-
-    public List<Attribute> getAttributesOfEntity(UUID entity) {
-        Optional<Entity> Opt = entityRepository.findById(entity);
-        if(Opt.isEmpty()){
-            throw new IllegalStateException(EMPTY);
-        }
-        Entity entity1 = Opt.get();
-        return entity1.getAttributes();
-    }
-
-    public void deleteEntityInAttribute(UUID entity, String attribute) {
-        Optional<Attribute> Opt = attributeRepository.findByTitle(attribute);
-        Optional<Entity>Opt2 = entityRepository.findById(entity);
-        if(Opt2.isEmpty() || Opt.isEmpty()){
-            throw new IllegalStateException(EMPTY);
-        }
-        Attribute attribute1 = Opt.get();
-        Entity entity1 = Opt2.get();
-        attribute1.getEntities().remove(entity1);
-        attributeRepository.save(attribute1);
-    }*/
-
-    //9
     @Modifying
     @Transactional
     public void  addAttrInAttrSet(UUID setId, List<Attribute> attributes) {
@@ -284,5 +176,145 @@ public class EntityService {
         }
         attribute.getDefinedValues().addAll(attributeValues);
         attributeRepository.save(attribute);
+    }
+/*-------------------------------------------------------------------*/
+    public void addEntityInAttribute(UUID attributeId, Entity entity) throws Exception {
+        Optional<Attribute> Opt = attributeRepository.findById(attributeId);
+        if (Opt.isEmpty()){
+            throw new Exception("Attribute with id "+attributeId+" is not present");
+        }
+        Attribute attribute = Opt.get();
+        attribute.getEntityList().add(entity);
+        entity.getAttributeList().add(attribute);
+        attributeRepository.save(attribute);
+    }
+
+    public void removeEntityTypeFromAttribute(UUID attributeId, UUID entityTypeId) throws Exception {
+        Optional<Attribute> Opt = attributeRepository.findById(attributeId);
+        Optional<Entity_Type> OptE = entityTypeRepository.findById(entityTypeId);
+        if (Opt.isEmpty() || OptE.isEmpty()){
+            throw new Exception("Attribute with id "+attributeId+" is not present");
+        }
+        Attribute attribute = Opt.get();
+        Entity_Type entityType = OptE.get();
+        attribute.getEntityTypes().remove(OptE.get());
+        entityType.getAttributes().remove(attribute);
+        attributeRepository.save(attribute);
+    }
+
+    public void createEntityType(Entity_Type entityType) {
+        entityTypeRepository.save(entityType);
+    }
+
+    public List<Entity_Type> getAllEntityType() {
+        return entityTypeRepository.findAll();
+    }
+
+    public void addAttributeInEntityType(UUID entityTypeId, Attribute attribute) throws Exception {
+        Optional<Entity_Type> Opt = entityTypeRepository.findById(entityTypeId);
+        if (Opt.isEmpty()){
+            throw new Exception("EntityType with id "+entityTypeId+" is not present");
+        }
+        Entity_Type entity_type = Opt.get();
+        entity_type.getAttributes().add(attribute);
+        attribute.getEntityTypes().add(entity_type);
+        entityTypeRepository.save(entity_type);
+    }
+
+    public void removeAttributeFromEntityType(UUID entityTypeId, UUID attributeId) throws Exception {
+        Optional<Entity_Type> optionalEntityType = entityTypeRepository.findById(entityTypeId);
+        Optional<Attribute> optionalAttribute = attributeRepository.findById(attributeId);
+        if (optionalEntityType.isEmpty() || optionalAttribute.isEmpty()){
+            throw new Exception("EntityType with id "+entityTypeId+" is not present");
+        }
+        Entity_Type entity_type = optionalEntityType.get();
+        Attribute attribute = optionalAttribute.get();
+        entity_type.getAttributes().remove(attribute);
+        attribute.getEntityTypes().remove(entity_type);
+        entityTypeRepository.save(entity_type);
+    }
+
+    public List<Entity> getEntitiesOfAttribute(UUID attributeId) throws Exception {
+        Optional<Attribute> optionalAttribute = attributeRepository.findById(attributeId);
+        if(optionalAttribute.isEmpty()){
+            throw new Exception("Attribute with id "+attributeId+" is not present");
+        }
+        Attribute attribute = optionalAttribute.get();
+        return attribute.getEntityList();
+    }
+
+    public void removeEntityFromAttribute(UUID attributeId, UUID entityId) throws Exception {
+        Optional<Attribute> Opt = attributeRepository.findById(attributeId);
+        Optional<Entity> OptE = entityRepository.findById(entityId);
+        if (Opt.isEmpty() || OptE.isEmpty()){
+            throw new Exception("Attribute or Entity id  is not present");
+        }
+        Attribute attribute = Opt.get();
+        Entity entity = OptE.get();
+        attribute.getEntityList().remove(OptE.get());
+        entity.getAttributeList().remove(attribute);
+        attributeRepository.save(attribute);
+    }
+
+    public void addEntityTypeInAttribute(UUID attributeId, Entity_Type entityType) throws Exception {
+        Optional<Attribute> Opt = attributeRepository.findById(attributeId);
+        if (Opt.isEmpty()){
+            throw new Exception("Attribute with id "+attributeId+" is not present");
+        }
+        Attribute attribute = Opt.get();
+        attribute.getEntityTypes().add(entityType);
+        entityType.getAttributes().add(attribute);
+        attributeRepository.save(attribute);
+    }
+
+    public List<Attribute> getAttributesOfEntity(UUID entityId) throws Exception {
+        Optional<Entity> Opt = entityRepository.findById(entityId);
+        if (Opt.isEmpty()){
+            throw new Exception("Entity with Id "+entityId+" is not present");
+        }
+        Entity entity = Opt.get();
+        return entity.getAttributeList();
+    }
+
+    public void addAttributeInEntity(UUID entityId, Attribute attribute) throws Exception {
+        Optional<Entity> Opt = entityRepository.findById(entityId);
+        if (Opt.isEmpty()){
+            throw new Exception("Attribute with id "+entityId+" is not present");
+        }
+        Entity entity = Opt.get();
+        entity.getAttributeList().add(attribute);
+        attribute.getEntityList().add(entity);
+        entityRepository.save(entity);
+    }
+
+    public void removeAttributeFromEntity(UUID entityId, UUID attributeId) throws Exception {
+        Optional<Attribute> Opt = attributeRepository.findById(attributeId);
+        Optional<Entity> OptE = entityRepository.findById(entityId);
+        if (Opt.isEmpty() || OptE.isEmpty()){
+            throw new Exception("Attribute or Entity id  is not present");
+        }
+        Attribute attribute = Opt.get();
+        Entity entity = OptE.get();
+        attribute.getEntityList().remove(OptE.get());
+        entity.getAttributeList().remove(attribute);
+        attributeRepository.save(attribute);
+    }
+
+    public List<Entity_Type> getEntitiesTypeOfAttribute(UUID attributeId) throws Exception {
+        Optional<Attribute> optionalAttribute = attributeRepository.findById(attributeId);
+        if(optionalAttribute.isEmpty()){
+            throw new Exception("Attribute with id "+attributeId+" is not present");
+        }
+        Attribute attribute = optionalAttribute.get();
+        return attribute.getEntityTypes();
+    }
+
+    public List<Attribute> getAttributesOfEntityType(UUID entityTypeId) throws Exception {
+        Optional<Entity_Type> optionalEntityType = entityTypeRepository.findById(entityTypeId);
+        if(optionalEntityType.isEmpty()){
+            throw new Exception("Entity with id "+entityTypeId+" is not present");
+        }
+        Entity_Type entity_type = optionalEntityType.get();
+        return entity_type.getAttributes();
     }
 }

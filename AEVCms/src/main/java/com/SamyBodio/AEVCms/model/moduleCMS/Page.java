@@ -1,14 +1,11 @@
 package com.SamyBodio.AEVCms.model.moduleCMS;
 
-import com.SamyBodio.AEVCms.model.Attribute;
-import com.SamyBodio.AEVCms.model.entity.TString2;
 import com.SamyBodio.AEVCms.model.entity.TString;
 import com.SamyBodio.AEVCms.model.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.awt.*;
 import java.util.List;
 
 

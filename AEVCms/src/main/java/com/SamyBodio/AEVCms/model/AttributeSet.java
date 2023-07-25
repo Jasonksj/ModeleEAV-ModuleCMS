@@ -4,24 +4,25 @@ import com.SamyBodio.AEVCms.model.entity.*;
 import com.SamyBodio.AEVCms.model.entity.User;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @jakarta.persistence.Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode
 @Table(
         name = "AttributeSet"
 )
-public class AttributeSet extends Entity {
+public class AttributeSet extends SuperEntity {
 
     private Boolean shareable;
 
@@ -31,14 +32,8 @@ public class AttributeSet extends Entity {
     )
     private List<Attribute> attributes = new ArrayList<>();
 
-    public AttributeSet(String slug,
-                       @Nullable User createBy,
-                       @Nullable User updateBy,
-                       @Nullable User deleteBy,
-                       TString title,
-                       TString description,
-                       Boolean shareable) {
-        super(slug,title,description,createBy,updateBy,deleteBy);
+    public AttributeSet(@Nullable String slug, @Nullable User createBy, @Nullable User updateBy, @Nullable User deleteBy, TString title, TString description, Boolean shareable) {
+        super(slug, createBy, updateBy, deleteBy, title, description);
         this.shareable = shareable;
     }
 }

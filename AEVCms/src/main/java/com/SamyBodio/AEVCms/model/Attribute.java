@@ -2,24 +2,21 @@ package com.SamyBodio.AEVCms.model;
 
 
 import com.SamyBodio.AEVCms.model.entity.TString;
-import com.SamyBodio.AEVCms.model.entity.TString2;
 import com.SamyBodio.AEVCms.model.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @jakarta.persistence.Entity
 @ToString
 @Getter
 @Setter
-@NoArgsConstructor
 @EqualsAndHashCode
-public class Attribute extends Entity {
+@NoArgsConstructor
+public class Attribute extends SuperEntity {
     private AttributeType type;
     private Boolean herited;
     private Boolean requiredValue;
@@ -33,7 +30,8 @@ public class Attribute extends Entity {
 
     @JsonIgnore
     @ManyToOne(
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
     )
     @JoinColumn(
             name = "AttributeSet_Id",
@@ -41,44 +39,61 @@ public class Attribute extends Entity {
     )
     private AttributeSet attributeSet;
 
+
     @OneToMany(
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
     )
     @JoinColumn(
             name = "AttributeValues_Id",
             referencedColumnName = "_Id"
     )
+    @ToString.Exclude
     private List<AttributeValue> definedValues;
-    @OneToMany(
-            cascade = CascadeType.ALL
+
+
+    @JsonIgnore(value = false)
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
     )
-    @JoinColumn(
-            name = "AttributeValues_Id",
-            referencedColumnName = "_Id"
+    @JoinTable(
+            name = "Attribute_Entity",
+            joinColumns = @JoinColumn(name = "attribute_id",referencedColumnName = "_Id"),
+            inverseJoinColumns = @JoinColumn(name = "entity_Id",referencedColumnName = "_Id")
     )
-    private List<Entity_Type> entityTypeList;
+    @ToString.Exclude
+    private List<Entity> entityList;
+
+    @JsonIgnore(value = false)
+    @ManyToMany
+    @JoinTable(
+            name = "attribute_entity_type",
+            joinColumns = @JoinColumn(name = "attribute_id",referencedColumnName = "_Id"),
+            inverseJoinColumns = @JoinColumn(name = "entity_type_id",referencedColumnName = "id")
+    )
+    @ToString.Exclude
+    private List<Entity_Type> entityTypes;
 
 
     private boolean IsRequired;
-    public Attribute(String slug,
-                     TString title,
-                     TString description,
-                     User createBy,
-                     User updateBy,
-                     User deleteBy,
-                     AttributeType type,
-                     Boolean herited,
-                     Boolean requiredValue,
-                     Boolean measurable,
-                     Boolean isEntityDedicated) {
-        super(slug,title,description,createBy,updateBy,deleteBy);
-        this.title = title;
-        this.description = description;
+
+    public Attribute(@Nullable String slug, @Nullable User createBy, @Nullable User updateBy, @Nullable User deleteBy, TString title,
+                     TString description, AttributeType type, Boolean herited, Boolean requiredValue, Boolean multipleValues,
+                     Boolean freezeValues, Boolean overriden, Boolean shareable, Boolean shared, Boolean measurable, Boolean isEntityDedicated,
+                     boolean isRequired) {
+        super(slug, createBy, updateBy, deleteBy, title, description);
         this.type = type;
         this.herited = herited;
         this.requiredValue = requiredValue;
+        this.multipleValues = multipleValues;
+        this.freezeValues = freezeValues;
+        this.overriden = overriden;
+        this.shareable = shareable;
+        this.shared = shared;
         this.measurable = measurable;
-        this.IsEntityDedicated = isEntityDedicated;
+        IsEntityDedicated = isEntityDedicated;
+        IsRequired = isRequired;
     }
 
     public void addPredifinedValues(List<AttributeValue> attributeValue){

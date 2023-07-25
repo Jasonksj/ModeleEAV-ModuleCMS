@@ -3,31 +3,36 @@ package com.SamyBodio.AEVCms.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-//gar tu vas commencer a me gener ??? le faite que tu remettent les typ
-// eT String  Tu voulais que jarrange le code nor ?Que ca compile ok
-//Work sans compiler !!!!!
-//Pour la compilation on va arranger le code avant! de compiler sinon on va se gener mutuellement
+
+import java.util.List;
+import java.util.UUID;
+
 @jakarta.persistence.Entity
 @Table
 @ToString
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
-public class Entity_Type {
+public class Entity_Type{
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-    generator = "et")
-    @SequenceGenerator(name = "et", sequenceName = "et", allocationSize = 1)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
     private String name;
+
     @JsonIgnore
-    @ManyToOne(
-            cascade = CascadeType.ALL
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            mappedBy = "entityType"
     )
-    @JoinColumn(
-            name = "Attribute_Id",
-            referencedColumnName = "_Id"
+    private List<Entity> entityList;
+
+    @JsonIgnore
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            mappedBy = "entityTypes"
     )
-    private Attribute attribute;
+    private List<Attribute> attributes;
 }

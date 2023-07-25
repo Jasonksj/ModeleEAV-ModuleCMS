@@ -3,10 +3,13 @@ package com.SamyBodio.AEVCms.model;
 import com.SamyBodio.AEVCms.model.entity.Jsonconverter;
 import com.SamyBodio.AEVCms.model.entity.TString;
 import com.SamyBodio.AEVCms.model.entity.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 //@jakarta.persistence.Entity
@@ -15,44 +18,26 @@ import java.util.UUID;
 @Setter
 @EqualsAndHashCode
 @ToString
-@MappedSuperclass
-public abstract class Entity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    protected UUID _Id;
+@jakarta.persistence.Entity
+public class Entity extends SuperEntity{
 
-    protected String slug;
 
-    @Column(columnDefinition = "json")
-    @Convert(converter = Jsonconverter.class)
-    protected TString title;
-    @Column(columnDefinition = "json")
-    @Convert(converter = Jsonconverter.class)
-    protected TString description;
-
-    @Temporal(TemporalType.DATE)
-    protected LocalDate createAt;
-
+    @JsonIgnore
     @ManyToOne(
             cascade = CascadeType.ALL
     )
-    protected User createBy;
-
-    @Temporal(TemporalType.DATE)
-    protected LocalDate updateAt;
-
-    @ManyToOne(
-            cascade = CascadeType.ALL
+    @JoinColumn(
+            name = "entityType_id",
+            referencedColumnName = "id"
     )
-    protected User updateBy;
+    private Entity_Type entityType;
 
-    @Temporal(TemporalType.DATE)
-    protected LocalDate deleteAt;
-    @ManyToOne(
-            cascade = CascadeType.ALL
+    @JsonIgnore
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            mappedBy = "entityList"
     )
-    protected User deleteBy;
-
+    private List<Attribute> attributeList = new ArrayList<>();
 
     protected Entity(String slug, TString title, TString description, User createBy, User updateBy, User deleteBy) {
         this.slug = slug;

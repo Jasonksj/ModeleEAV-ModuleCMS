@@ -1,7 +1,6 @@
 package com.SamyBodio.AEVCms.model.moduleCMS;
 
 import com.SamyBodio.AEVCms.model.Entity;
-import com.SamyBodio.AEVCms.model.entity.TString2;
 import com.SamyBodio.AEVCms.model.entity.TString;
 import com.SamyBodio.AEVCms.model.entity.User;
 import jakarta.persistence.Table;

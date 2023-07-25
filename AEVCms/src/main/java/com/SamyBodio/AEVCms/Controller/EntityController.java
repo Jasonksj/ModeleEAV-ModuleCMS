@@ -4,6 +4,7 @@ import com.SamyBodio.AEVCms.Service.EntityService;
 import com.SamyBodio.AEVCms.model.Attribute;
 import com.SamyBodio.AEVCms.model.AttributeValue;
 import com.SamyBodio.AEVCms.model.entity.User;
+import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +26,8 @@ public class EntityController {
     public ResponseEntity<String> createAttribute(@RequestBody Attribute attribute,
                                                   @RequestParam("userName") String userName,
                                                   @RequestParam("userPwd") String userPwd) {
-        Logger.getLogger(attribute.get_Id()+" "+attribute+" "+attribute.getDefinedValues().get(0).get_Id());
         User user = new User(userName,userPwd);
-        entityService.CreateAttributes(user, attribute,attribute.getDefinedValues());
+        entityService.CreateAttributes(user, attribute);
         return ResponseEntity.ok("Insertion réussie");
     }
     @GetMapping
@@ -61,7 +61,10 @@ public class EntityController {
 
     /*---------------------------attributeSet-------------------------------*/
     @PostMapping(path = "/created_set_attr")
-    public ResponseEntity<String> createAttrSet(@RequestBody AttributeSet attrSet,@RequestParam String name,@RequestParam String pwd){
+    public ResponseEntity<String> createAttrSet(@RequestBody AttributeSet attrSet,
+                                                @Nullable @RequestParam String name,
+                                                @Nullable @RequestParam String pwd)
+    {
         entityService.createAttributeSet(attrSet,name,pwd);
         return ResponseEntity.ok("Creation réussie");
     }
@@ -70,7 +73,7 @@ public class EntityController {
         entityService.deleteAttributeSet(attrSet);
         return ResponseEntity.ok(REUSSIE);
     }
-    @PutMapping(path = "/update_attr/{set}")
+    @PutMapping(path = "/updateAttrSet/{set}")
     public ResponseEntity<String> updateAttrSet(@PathVariable("set") UUID attrSet,@RequestBody AttributeSet attributeSet){
         entityService.updateAttributeSet(attrSet,attributeSet);
         return ResponseEntity.ok("Modification réussie");
@@ -93,46 +96,79 @@ public class EntityController {
         return entityService.getAttributeSetInfo(attrSet);
     }
 
-    @GetMapping(path = "/attr/entity_type/{attr}")
-    public List<Entity_Type> getEntityTypeOfAttribute(@PathVariable("attr") UUID attr){
-        return entityService.getAttributeEntity_type(attr);
-    }
-    /*----------------------------------Entity - Attribute---------------------------------------*/
 
-    /*
-    @PutMapping(path = "/entity")
-    public ResponseEntity<String>tu addEntityInAttribute(@RequestParam UUID str, @RequestBody List<Entity>  entity){
-        entityService.addEntityInAttribute(str,entity);
-        return ResponseEntity.ok("Insertion reussi");
-    }//false
+    /*----------------------------------Entity Type---------------------------------------*/
+    @GetMapping(path = "/getEntitiesTypeOfAttribute/{Id}")
+    public List<Entity_Type> getEntitiesTypeOfAttribute(@PathVariable("Id") UUID attributeId) throws Exception {
+        return entityService.getEntitiesTypeOfAttribute(attributeId);
+    }
 
-    @GetMapping(path = "/entity/{str}")
-    public List<Entity> getEntityInAttribute(@PathVariable UUID str){
-        return entityService.getEntityInAttribute(str);
+    @PutMapping(path ="/addEntityTypeInAttribute/{Id}")
+    public ResponseEntity<String> addEntityTypeInAttribute(@PathVariable("Id") UUID attributeId,@RequestBody Entity_Type entityType) throws Exception {
+        entityService.addEntityTypeInAttribute(attributeId, entityType);
+        return ResponseEntity.ok("Ajout reussi");
     }
-    /*
-    @DeleteMapping(path ="/entity/{str}" )
-    public ResponseEntity<String> deleteEntityInAttribute(@PathVariable UUID attribute, @RequestParam String Entity){
-        entityService.deleteEntityInAttribute(attribute,Entity);
-        return ResponseEntity.ok("Suppression reussie");
-    }//false
-    */
-    /*
-    @GetMapping(path = "/entityAttr/{entity}")
-    public List<Entity> getEntitiesOfAttribute(@PathVariable UUID attr){
-        return entityService.getEntitiesOfAttribute(attr);
+
+    @PutMapping(path = "/removeEntityTypeFromAttribute/{Id}")
+    public ResponseEntity<String> removeEntityTypeFromAttribute(@PathVariable("Id") UUID attributeId,@RequestParam UUID EntityTypeId) throws Exception {
+        entityService.removeEntityTypeFromAttribute(attributeId,EntityTypeId);
+        return ResponseEntity.ok("Suppression reussi");
     }
-    */
-    @PutMapping(path = "/entityAttr/{entity}")
-    public ResponseEntity<String> addEntity_tyêInAttribut(@PathVariable UUID attribuId,@RequestParam Entity_Type entity_type){
-        entityService.addEntity_tyêInAttribut(attribuId,entity_type);
+
+    @PostMapping(path = "/createEntityType")
+    public ResponseEntity<String> createEntityType(@RequestBody Entity_Type EntityType){
+        entityService.createEntityType(EntityType);
+        return ResponseEntity.ok("Creation reussi");
+    }
+
+    @GetMapping(path="/getAllEntityType")
+    public List<Entity_Type> getAllEntityType(){
+        return entityService.getAllEntityType();
+    }
+    @GetMapping(path="/getAttributesOfEntityType/{Id}")
+    public List<Attribute> getAttributesOfEntityType(@PathVariable("Id") UUID EntityTypeId) throws Exception {
+        return entityService.getAttributesOfEntityType(EntityTypeId);
+    }
+
+    @PutMapping(path = "/addAttributeInEntityType/{Id}")
+    public ResponseEntity<String> addAttributeInEntityType(@PathVariable("Id") UUID EntityTypeId,@RequestBody Attribute attribute) throws Exception {
+        entityService.addAttributeInEntityType(EntityTypeId,attribute);
+        return ResponseEntity.ok("Ajout reussi avec success");
+    }
+    @PutMapping(path="/removeAttributeFromEntityType/{Id}")
+    public ResponseEntity<String> removeAttributeFromEntityType(@PathVariable("Id") UUID EntityTypeId,@RequestParam UUID AttributeId) throws Exception {
+        entityService.removeAttributeFromEntityType(EntityTypeId,AttributeId);
+        return ResponseEntity.ok("suppression reussi");
+    }
+
+    /*-------------------------------------Entity--------------------------------------------*/
+
+    @GetMapping(path = "/getEntitiesOfAttribute/{Id}")
+    public List<Entity> getEntitiesOfAttribute(@PathVariable("Id") UUID attributeId) throws Exception {
+        return entityService.getEntitiesOfAttribute(attributeId);
+    }
+    @PutMapping(path = "/addEntityInAttribute/{Id}")
+    public ResponseEntity<String> addEntityInAttribute(@PathVariable("Id") UUID attributeId,@RequestBody Entity entity) throws Exception {
+        entityService.addEntityInAttribute(attributeId,entity);
         return ResponseEntity.ok("Mise a jour reussi");
     }
-    @DeleteMapping(path = "/entityAttr/{entity}")
-    public ResponseEntity<String> deleteEntity_typeinAttribut(@PathVariable UUID attr,@RequestParam UUID ent){
-        entityService.deleteEntity_typeinAttribut(attr,ent);
-        return ResponseEntity.ok(REUSSIE);
+    @DeleteMapping(path ="/removeEntityFromAttribute/{Id}" )
+    public ResponseEntity<String> removeEntityFromAttribute(@PathVariable("Id") UUID attributeId, @RequestParam UUID EntityId) throws Exception {
+        entityService.removeEntityFromAttribute(attributeId,EntityId);
+        return ResponseEntity.ok("Suppression reussie");
     }
-
-
+    @GetMapping(path="/getAttributesOfEntity/{Id}")
+    public List<Attribute>  getAttributesOfEntity(@PathVariable("Id") UUID EntityId) throws Exception {
+        return entityService.getAttributesOfEntity(EntityId);
+    }
+    @PutMapping(path = "/addAttributeInEntity/{Id}")
+    public ResponseEntity<String> addAttributeInEntity(@PathVariable("Id") UUID EntityId,@RequestBody Attribute attribute) throws Exception {
+        entityService.addAttributeInEntity(EntityId,attribute);
+        return ResponseEntity.ok("Ajout reussi");
+    }
+    @DeleteMapping(path = "/removeAttributeFromEntity/{Id}")
+    public ResponseEntity<String> removeAttributeFromEntity(@PathVariable("Id") UUID EntityId,@RequestParam UUID attributeId) throws Exception {
+        entityService.removeAttributeFromEntity(EntityId,attributeId);
+        return ResponseEntity.ok("Suppression Reussi");
+    }
 }
