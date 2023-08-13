@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "page_regions",
+  "info": {
+    "singularName": "page-region",
+    "pluralName": "page-regions",
+    "displayName": "PageRegion",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "page": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::page.page",
+      "inversedBy": "page_regions"
+    },
+    "slug": {
+      "type": "text"
+    },
+    "title": {
+      "type": "json"
+    },
+    "description": {
+      "type": "json"
+    }
+  }
+}

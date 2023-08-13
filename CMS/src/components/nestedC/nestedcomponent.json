@@ -1,0 +1,23 @@
+{
+  "collectionName": "nestedcomponent",
+  "info": {
+    "displayName": "Nestedcomponent"
+  },
+  "options": {},
+  "attributes": {
+    "overrideAttributes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::attribute.attribute"
+    },
+    "startDate": {
+      "type": "date"
+    },
+    "endDate": {
+      "type": "date"
+    },
+    "visible": {
+      "type": "boolean"
+    }
+  }
+}

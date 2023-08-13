@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "plages",
+  "info": {
+    "singularName": "plage",
+    "pluralName": "plages",
+    "displayName": "plage"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "attributes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::attribute.attribute",
+      "mappedBy": "plage"
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "kind": "collectionType",
+  "collectionName": "attributes",
+  "info": {
+    "singularName": "attribute",
+    "pluralName": "attributes",
+    "displayName": "Attribute",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "STRING",
+        "TSTRING",
+        "OBJECT",
+        "NUMBER",
+        "INT",
+        "FLOAT",
+        "BOOLEAN",
+        "CURRENCY",
+        "DATETIME",
+        "DATE",
+        "HOUR"
+      ]
+    },
+    "herited": {
+      "type": "boolean"
+    },
+    "requiredvalue": {
+      "type": "boolean"
+    },
+    "multiplevalues": {
+      "type": "boolean"
+    },
+    "freezevalues": {
+      "type": "boolean"
+    },
+    "overriden": {
+      "type": "boolean"
+    },
+    "shareable": {
+      "type": "boolean"
+    },
+    "shared": {
+      "type": "boolean"
+    },
+    "measurable": {
+      "type": "boolean"
+    },
+    "isentitydedicated": {
+      "type": "boolean"
+    },
+    "attributeset": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::attributeset.attributeset",
+      "inversedBy": "attributes"
+    },
+    "attributevalues": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::attributevalue.attributevalue",
+      "mappedBy": "attribute"
+    },
+    "predefinedValues": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::attributevalue.attributevalue",
+      "mappedBy": "predefinedValue"
+    },
+    "slug": {
+      "type": "text"
+    },
+    "title": {
+      "type": "json"
+    },
+    "description": {
+      "type": "json"
+    },
+    "plage": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::plage.plage",
+      "inversedBy": "attributes"
+    }
+  }
+}

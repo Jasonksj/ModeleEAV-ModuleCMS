@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "attributevalues",
+  "info": {
+    "singularName": "attributevalue",
+    "pluralName": "attributevalues",
+    "displayName": "AttributeValue",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "value": {
+      "type": "text"
+    },
+    "validated": {
+      "type": "boolean"
+    },
+    "suffix": {
+      "type": "json"
+    },
+    "symbol": {
+      "type": "json"
+    },
+    "attribute": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::attribute.attribute",
+      "inversedBy": "attributevalues"
+    },
+    "predefinedValue": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::attribute.attribute",
+      "inversedBy": "predefinedValues"
+    },
+    "slug": {
+      "type": "text"
+    },
+    "title": {
+      "type": "json"
+    },
+    "description": {
+      "type": "json"
+    }
+  }
+}

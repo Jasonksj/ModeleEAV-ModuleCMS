@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_view_views",
+  "info": {
+    "displayName": "View",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "entity": {
+      "type": "component",
+      "repeatable": false,
+      "component": "entity.entity"
+    },
+    "attributes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::attribute.attribute"
+    },
+    "seoAttributes": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seodata.seo-data"
+    }
+  }
+}

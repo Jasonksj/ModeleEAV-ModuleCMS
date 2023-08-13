@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "components",
+  "info": {
+    "singularName": "component",
+    "pluralName": "components",
+    "displayName": "Component",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "component_type": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::component-type.component-type",
+      "mappedBy": "component"
+    },
+    "sub_components": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::component.component",
+      "mappedBy": "component"
+    },
+    "component": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::component.component",
+      "inversedBy": "sub_components"
+    },
+    "page": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::page.page",
+      "inversedBy": "components"
+    },
+    "slug": {
+      "type": "text"
+    },
+    "title": {
+      "type": "json"
+    },
+    "description": {
+      "type": "json"
+    },
+    "attributes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::attribute.attribute"
+    },
+    "seoAttributes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::attributeset.attributeset"
+    }
+  }
+}

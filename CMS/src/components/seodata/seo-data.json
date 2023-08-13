@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_seodata_seo_data",
+  "info": {
+    "displayName": "SEOData"
+  },
+  "options": {},
+  "attributes": {
+    "seoAttributes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::attributeset.attributeset"
+    }
+  }
+}

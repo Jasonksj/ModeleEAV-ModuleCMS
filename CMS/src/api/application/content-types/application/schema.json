@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "applications",
+  "info": {
+    "singularName": "application",
+    "pluralName": "applications",
+    "displayName": "Application",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "slogan": {
+      "type": "string"
+    },
+    "attributes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::attribute.attribute"
+    },
+    "slug": {
+      "type": "text"
+    },
+    "title": {
+      "type": "json"
+    },
+    "description": {
+      "type": "json"
+    },
+    "SeoAttributes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::attributeset.attributeset"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "collectionName": "entity",
+  "info": {
+    "displayName": "Entity",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "slug": {
+      "type": "text"
+    },
+    "title": {
+      "type": "json"
+    },
+    "description": {
+      "type": "json"
+    }
+  }
+}
